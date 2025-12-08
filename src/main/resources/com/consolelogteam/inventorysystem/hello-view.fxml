@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.consolelogteam.inventorysystem.GUIController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.consolelogteam.inventorysystem.GUIController">
+   <children>
+      <ListView fx:id="inventoryListView" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="removeItemOnClick" layoutX="274.0" layoutY="326.0" mnemonicParsing="false" text="Button" />
+      <ComboBox layoutX="35.0" layoutY="100.0" prefWidth="150.0" />
+      <ComboBox layoutX="35.0" layoutY="200.0" prefWidth="150.0" />
+      <ComboBox layoutX="35.0" layoutY="149.0" prefWidth="150.0" />
+      <TextField fx:id="selectedItemTextField" layoutX="226.0" layoutY="63.0" />
+   </children>
+</AnchorPane>

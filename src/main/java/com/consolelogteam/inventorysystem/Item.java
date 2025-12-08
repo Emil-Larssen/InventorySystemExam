@@ -8,4 +8,12 @@ public class Item {
         this.itemName = itemName;
         this.weight = weight;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String toString() {
+        return itemName + "   " + weight;
+    }
 }
