@@ -18,4 +18,8 @@ public class Item {
     public String toString() {
         return itemName + "   " + weight;
     }
+
+    public double getWeight() {
+        return weight;
+    }
 }
