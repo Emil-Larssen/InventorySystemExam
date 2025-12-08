@@ -21,4 +21,31 @@ public class Inventory {
         inventoryList.remove(item);
     }
 
+
+
+
+
+    // bobble sortering Alfabetisk
+    public void sortInventoryAlphabetically() {
+        boolean swappedSomething = true;
+
+        while (swappedSomething) {
+            swappedSomething = false;
+
+            for (int i = 0; i < inventoryList.size() - 1; i++) {
+                if (inventoryList.get(i).getItemName()
+                        .compareTo(inventoryList.get(i + 1).getItemName()) > 0) {
+                    swappedSomething = true;
+
+                    Item temp = inventoryList.get(i);
+                    inventoryList.set(i, inventoryList.get(i + 1));
+                    inventoryList.set(i + 1, temp);
+                }
+            }
+        }
+    }
+
+
+
 }
+

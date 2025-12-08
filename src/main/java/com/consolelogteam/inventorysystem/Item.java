@@ -10,4 +10,12 @@ public class Item {
         this.itemType = itemType;
         this.weight = weight;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String toString() {
+        return itemName + "   " + weight;
+    }
 }
