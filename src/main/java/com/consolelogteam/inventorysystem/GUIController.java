@@ -40,7 +40,7 @@ public class GUIController {
 
     @FXML
     public void initialize() {
-        inventoryListView.setItems(inventoryManager.getAllItems());
+        inventoryListView.setItems(inventoryManager.getItemList());
 
         inventoryListView.getSelectionModel()
                 .selectedItemProperty()
