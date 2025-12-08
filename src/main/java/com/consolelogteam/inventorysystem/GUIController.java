@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import com.consolelogteam.inventorysystem.ItemId;
 
 public class GUIController {
     @FXML
@@ -25,6 +26,8 @@ public class GUIController {
 
     @FXML
     private Button removeItemOnClick;
+
+
 
     private final InventoryManager inventoryManager = new InventoryManager();
 
