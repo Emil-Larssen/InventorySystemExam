@@ -1,4 +1,9 @@
 package com.consolelogteam.inventorysystem;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
+
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
