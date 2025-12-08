@@ -1,11 +1,14 @@
 package com.consolelogteam.inventorysystem;
+import com.consolelogteam.inventorysystem.ItemId;
 
 public class InventoryManager {
-    Inventory inventory = new Inventory();
+    private Inventory inventory = new Inventory();
 
-    private void putItemInInventory(String name) {
-        inventory.addItem(name);
+    private void addItemToInventory(ItemId itemId) {
+        inventory.addItem(itemId);
     }
+
+
     //removeItemFromInventory(){}
 
 }

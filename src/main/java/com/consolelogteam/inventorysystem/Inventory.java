@@ -6,12 +6,16 @@ import javafx.collections.ObservableList;
 public class Inventory {
 
     private ObservableList<Item> inventoryList = FXCollections.observableArrayList();
+    private ItemFactory itemfactory = new ItemFactory();
+
+
 
     public ObservableList<Item> getInventoryList() {
         return inventoryList;
     }
-    public void addItem(String name) {
-        inventoryList.add(new Item(name,0.96));
+
+    public void addItem(ItemId itemid) {
+        inventoryList.add(itemfactory.createItem(itemid));
     }
     private void removeItem(Item item) {
         inventoryList.remove(item);
