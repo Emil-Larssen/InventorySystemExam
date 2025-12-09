@@ -14,6 +14,10 @@ public class Inventory {
     private ItemFactory itemfactory = new ItemFactory();
 
 
+    public void loadSavedList(ObservableList<Item> savedList){
+        inventoryList = savedList;
+    }
+
 
     public ObservableList<Item> getInventoryList() {
         return inventoryList;

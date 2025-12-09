@@ -47,6 +47,10 @@ public class GUIController {
 
     @FXML
     public void initialize() {
+        //Added loading the saved Inventory as the first part of initialize
+        //Proper exception handling is a TO-DO
+        inventoryManager.loadingSavedInventory();
+
         inventoryListView.setItems(inventoryManager.getItemList());
 
         inventoryListView.getSelectionModel()
@@ -69,5 +73,7 @@ public class GUIController {
 
     public void addItemToInventory(ItemId itemId) {
         inventoryManager.addItemToInventory(itemId);
+        //Added saving the inventory to the addItemFeature
+        inventoryManager.savingInventory();
     }
 }

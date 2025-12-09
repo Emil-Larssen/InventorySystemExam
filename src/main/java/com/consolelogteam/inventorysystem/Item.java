@@ -1,6 +1,10 @@
 package com.consolelogteam.inventorysystem;
 
-public class Item {
+import java.io.Serializable;
+
+//To be able to be saved to a file like we are doing the object must implement Serializable
+//It shouldn't have any impact on any of the other code whatsoever
+public class Item implements Serializable {
     private String itemName;
     private double weight;
     ItemType itemType;

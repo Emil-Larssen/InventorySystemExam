@@ -5,6 +5,19 @@ import javafx.collections.ObservableList;
 public class InventoryManager {
     private Inventory inventory = new Inventory();
 
+    //Persistence object added to interact with the class
+    private Persistence persistence = new Persistence();
+
+    //Works as a link between persistence and inventory
+    public void loadingSavedInventory(){
+        inventory.loadSavedList(persistence.loadListOfItems());
+    }
+
+    public void savingInventory(){
+        persistence.saveListOfItems(inventory.getInventoryList());
+    }
+
+
     public void addItemToInventory(ItemId itemId) {
         inventory.addItem(itemId);
     }
