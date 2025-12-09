@@ -1,5 +1,7 @@
 package com.consolelogteam.inventorysystem;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -7,36 +9,41 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import com.consolelogteam.inventorysystem.ItemId;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
 public class GUIController {
+
+    private final InventoryManager inventoryManager = new InventoryManager();
+
+    List<ItemId> list = Arrays.asList(ItemId.values());
+    ObservableList<ItemId> availableItems = FXCollections.observableArrayList(list);
+
+
     @FXML
     private ListView<Item> inventoryListView;
+
+    @FXML
+    private ListView<ItemId> itemListView;
 
     @FXML
     private TextField selectedItemTextField;
 
     @FXML
-    private TextField txtName;
-
-    @FXML
-    private ComboBox<String> WeaponsBox;
-    @FXML
-    private ComboBox<String> ConsumeableBox;
-    @FXML
-    private ComboBox<String> ArmorBox;
+    private Button addItemOnClick;
 
     @FXML
     private Button removeItemOnClick;
 
-
-
-    private final InventoryManager inventoryManager = new InventoryManager();
-
     @FXML
-    private void onWeaponClick() {
-        String name = txtName.getText().trim();
-        String tema = WeaponsBox.getValue();
-
+    private void addItemOnClick() {
+        ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
+        if (selectedId != null) {
+            addItemToInventory(selectedId);
+        }
     }
+
 
     @FXML
     public void initialize() {
@@ -46,22 +53,21 @@ public class GUIController {
                 .selectedItemProperty()
                 .addListener((obs, oldItem, newItem) -> {
                     if (newItem != null) {
-                        selectedItemTextField.setText("Valgt frugt: " + newItem.getItemName());
+                        selectedItemTextField.setText("Valgt item: " + newItem.getItemName());
                     } else {
-                        selectedItemTextField.setText("Ingen frugt valgt");
+                        selectedItemTextField.setText("Ingen item valgt");
                     }
                 });
 
-        selectedItemTextField.setText("Ingen frugt valgt");
+        selectedItemTextField.setText("Ingen item valgt");
 
-        // fyld comboboxen med Tekst, når viewet loades
-        WeaponsBox.getItems().addAll("Sværd", "Pistol", "MagiskStav");
-        ConsumeableBox.getItems().addAll("ManaPotions", "HealthPotions", "Pile");
-        ArmorBox.getItems().addAll("Hjelm", "Rustning", "IronPants");
+        //--------------------------------
+
+        itemListView.setItems(availableItems);
+
     }
 
-
+    public void addItemToInventory(ItemId itemId) {
+        inventoryManager.addItemToInventory(itemId);
+    }
 }
-
-
-
