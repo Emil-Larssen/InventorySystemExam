@@ -33,6 +33,11 @@ public class Inventory {
         return inventoryList;
     }
 
+    public Item tempMakeItem(ItemId itemId){
+         return itemfactory.createItem(itemId);
+    }
+
+
     public void addItem(ItemId itemid) {
         inventoryList.add(itemfactory.createItem(itemid));
     }

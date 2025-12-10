@@ -64,6 +64,9 @@ public class GUIController {
             case "Sorter efter Vægt":
                 inventoryManager.sortingAfterWeight();
                 break;
+            case "Sorter efter Kategori":
+                inventoryManager.sortInventoryByType();
+                break;
             default:
         }
     }
@@ -112,7 +115,7 @@ public class GUIController {
         itemListView.setItems(availableItems);
 
         //-----------------------------------
-        sortingCombobox.getItems().addAll("Sorter efter Navn", "Sorter efter Vægt");
+        sortingCombobox.getItems().addAll("Sorter efter Navn", "Sorter efter Vægt", "Sorter efter Kategori");
     }
 
 
