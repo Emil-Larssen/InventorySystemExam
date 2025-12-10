@@ -4,12 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import com.consolelogteam.inventorysystem.ItemId;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,11 +29,13 @@ public class GUIController {
     private TextField selectedItemTextField;
 
     @FXML
-    private Button addItemOnClick;
+    private void removeItemOnClick() {
+        if (inventoryListView != null) {
+            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex());
+        }
+    }
 
-    @FXML
-    private Button removeItemOnClick;
-
+    //Tilføjer en item til inventory
     @FXML
     private void addItemOnClick() {
         ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
@@ -43,7 +43,6 @@ public class GUIController {
             addItemToInventory(selectedId);
         }
     }
-
 
     @FXML
     public void initialize() {
@@ -68,12 +67,16 @@ public class GUIController {
         //--------------------------------
 
         itemListView.setItems(availableItems);
-
     }
 
+    //Forbinder addItemOnClick med inventory manager
     public void addItemToInventory(ItemId itemId) {
         inventoryManager.addItemToInventory(itemId);
         //Added saving the inventory to the addItemFeature
         inventoryManager.savingInventory();
+    }
+
+    public void removeItemFromInventory(int inventoryindex) {
+        inventoryManager.removeItemFromInventory(inventoryindex);
     }
 }
