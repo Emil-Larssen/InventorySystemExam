@@ -50,6 +50,7 @@ public class GUIController {
         }
     }
 
+    //Henter sorterings algoritmer fra InventoryManager/inventory.
     @FXML
     private void sortingButtonOnClick() {
         switch(sortingCombobox.getValue()) {
