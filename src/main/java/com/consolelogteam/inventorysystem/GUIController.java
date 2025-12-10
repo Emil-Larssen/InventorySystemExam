@@ -53,7 +53,7 @@ public class GUIController {
     //Henter sorterings algoritmer fra InventoryManager/inventory.
     @FXML
     private void sortingButtonOnClick() {
-        switch(sortingCombobox.getValue()) {
+        switch (sortingCombobox.getValue()) {
             case "Sorter efter Navn":
                 inventoryManager.sortingAfterName();
                 break;
@@ -61,14 +61,8 @@ public class GUIController {
                 inventoryManager.sortingAfterWeight();
                 break;
             default:
-        };
-
+        }
     }
-
-
-
-
-
 
     @FXML
     public void initialize() {
@@ -77,7 +71,7 @@ public class GUIController {
         inventoryManager.loadingSavedInventory();
 
         //------------------------------------
-
+        //Viser valgt item fra inventoryListView i textfield
         inventoryListView.setItems(inventoryManager.getItemList());
 
         inventoryListView.getSelectionModel()
@@ -93,6 +87,21 @@ public class GUIController {
         selectedItemTextField.setText("Ingen item valgt");
 
         //--------------------------------
+        //Viser valgt item fra itemListView i textfield
+        itemListView.setItems(inventoryManager.getItemList());
+
+        itemListView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((obs, oldItem, newItem) -> {
+                    if (newItem != null) {
+                        selectedItemTextField.setText("Valgt item: " + newItem.name());
+                    } else {
+                        selectedItemTextField.setText("Ingen item valgt");
+                    }
+                });
+
+        selectedItemTextField.setText("Ingen item valgt");
+
 
         itemListView.setItems(availableItems);
 
