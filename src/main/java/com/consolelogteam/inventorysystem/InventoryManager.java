@@ -18,8 +18,13 @@ public class InventoryManager {
     }
 
 
+
     public void addItemToInventory(ItemId itemId) {
         inventory.addItem(itemId);
+    }
+
+    public void removeItemFromInventory(int inventoryindex){
+        inventory.removeItem(inventoryindex);
     }
 
     public ObservableList getItemList(){
@@ -27,6 +32,6 @@ public class InventoryManager {
     }
 
 
-    //removeItemFromInventory(){}
+
 
 }
