@@ -17,8 +17,6 @@ public class InventoryManager {
         persistence.saveListOfItems(inventory.getInventoryList());
     }
 
-
-
     public void addItemToInventory(ItemId itemId) {
         inventory.addItem(itemId);
     }

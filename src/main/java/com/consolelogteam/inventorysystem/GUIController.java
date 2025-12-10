@@ -30,7 +30,8 @@ public class GUIController {
 
     @FXML
     private void removeItemOnClick() {
-        if (inventoryListView != null) {
+        Item item = inventoryListView.getSelectionModel().getSelectedItem();
+        if (item != null) {
             removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex());
         }
     }
@@ -49,6 +50,8 @@ public class GUIController {
         //Added loading the saved Inventory as the first part of initialize
         //TODO Proper exception handling is a TO-DO
         inventoryManager.loadingSavedInventory();
+
+        //------------------------------------
 
         inventoryListView.setItems(inventoryManager.getItemList());
 

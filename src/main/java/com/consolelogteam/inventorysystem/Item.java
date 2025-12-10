@@ -7,7 +7,7 @@ import java.io.Serializable;
 public abstract class Item implements Serializable {
     private String itemName;
     private double weight;
-    ItemType itemType;
+    private ItemType itemType;
 
     public Item(String itemName, double weight, ItemType itemType) {
         this.itemName = itemName;
