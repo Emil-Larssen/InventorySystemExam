@@ -16,7 +16,7 @@ public class Persistence {
 
             return FXCollections.observableArrayList(savedList);
 
-            //Exceptions are not properly caught TO-DO for later Exception handling
+            //TODO Exceptions are not properly caught TO-DO for later Exception handling
         } catch (FileNotFoundException fnfe) {
             throw new RuntimeException("No saved file was found");
         } catch (ClassNotFoundException cnfe){
@@ -34,7 +34,7 @@ public class Persistence {
             objectOutput.writeObject(new ArrayList<Item>(listOfItems));
             objectOutput.flush();
 
-            //Exceptions are not properly caught TO-DO for later Exception handling
+            //TODO Exceptions are not properly caught TO-DO for later Exception handling
         } catch (FileNotFoundException fnfe){
             throw new RuntimeException("No file was found to save to");
         } catch (IOException ioe) {

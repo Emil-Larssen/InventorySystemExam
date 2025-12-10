@@ -48,7 +48,7 @@ public class GUIController {
     @FXML
     public void initialize() {
         //Added loading the saved Inventory as the first part of initialize
-        //Proper exception handling is a TO-DO
+        //TODO Proper exception handling is a TO-DO
         inventoryManager.loadingSavedInventory();
 
         inventoryListView.setItems(inventoryManager.getItemList());

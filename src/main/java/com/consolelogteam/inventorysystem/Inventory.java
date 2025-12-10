@@ -13,6 +13,12 @@ public class Inventory {
     private ObservableList<Item> inventoryList = FXCollections.observableArrayList();
     private ItemFactory itemfactory = new ItemFactory();
 
+    //inventory constraints
+    public final int startinventoryslots = 32;
+    public int inventoryslots = 32;
+    public final int maxinventoryslots = 192;
+    public double weightlimit = 50.0;
+
 
     public void loadSavedList(ObservableList<Item> savedList){
         inventoryList = savedList;
@@ -26,8 +32,9 @@ public class Inventory {
     public void addItem(ItemId itemid) {
         inventoryList.add(itemfactory.createItem(itemid));
     }
-    private void removeItem(Item item) {
-        inventoryList.remove(item);
+    protected void removeItem(int inventoryindex) {
+        //Observable list remove() takes from-to indices. "to" being exclusive.
+        inventoryList.remove(inventoryindex, inventoryindex+1);
     }
 
 
