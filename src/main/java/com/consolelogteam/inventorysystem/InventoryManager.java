@@ -31,11 +31,31 @@ public class InventoryManager {
 
     public void sortingAfterName() {
         inventory.sortInventoryAlphabetically();
-
     }
 
     public void sortingAfterWeight() {
         inventory.sortInventoryByWeight();
+    }
+
+    public void updateSlotsFilled(){
+        inventory.setSlotsFilled(inventory.getInventoryLength());
+    }
+
+    public String inventoryItemLimit(){
+        return "Pladser: " + inventory.getSlotsFilled() + " / " + inventory.getItemSlotsLimit();
+    }
+
+
+    public void updateWeightFilled(){
+        double weight = 0;
+        for(Item item : inventory.getInventoryList()){
+            weight += item.getWeight();
+        }
+        inventory.setWeightFilled(weight);
+    }
+
+    public String inventoryWeightLimit(){
+        return "Vægt: " + inventory.getWeightFilled() + " / " + inventory.getWeightLimit();
     }
 
 

@@ -14,16 +14,20 @@ public class Inventory {
     private ItemFactory itemfactory = new ItemFactory();
 
     //inventory constraints
-    public final int startinventoryslots = 32;
-    public int inventoryslots = 32;
-    public final int maxinventoryslots = 192;
-    public double weightlimit = 50.0;
+    private final int STARTINGINVENTORYSLOTS = 32;
+    private final int MAXINVENTORYSLOTS = 192;
+    private final double WEIGHTLIMIT = 50.0;
+
+    private int inventorySlotsLimit = STARTINGINVENTORYSLOTS;
+
+    //Inventory overview
+    private int slotsFilled = 0;
+    private double weightFilled = 0;
 
 
     public void loadSavedList(ObservableList<Item> savedList){
         inventoryList = savedList;
     }
-
 
     public ObservableList<Item> getInventoryList() {
         return inventoryList;
@@ -37,6 +41,33 @@ public class Inventory {
         inventoryList.remove(inventoryindex, inventoryindex+1);
     }
 
+    public int getItemSlotsLimit(){
+        return inventorySlotsLimit;
+    }
+
+    public int getSlotsFilled(){
+        return slotsFilled;
+    }
+
+    public void setSlotsFilled(int slotsFilled){
+        this.slotsFilled = slotsFilled;
+    }
+
+    public double getWeightLimit(){
+        return WEIGHTLIMIT;
+    }
+
+    public double getWeightFilled(){
+        return weightFilled;
+    }
+
+    public void setWeightFilled(double weightFilled){
+        this.weightFilled = weightFilled;
+    }
+
+    public int getInventoryLength(){
+        return inventoryList.size();
+    }
 
 
 

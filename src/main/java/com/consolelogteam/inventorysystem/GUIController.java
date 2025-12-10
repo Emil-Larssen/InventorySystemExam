@@ -3,10 +3,7 @@ package com.consolelogteam.inventorysystem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import com.consolelogteam.inventorysystem.ItemId;
 
 import java.util.Arrays;
@@ -31,6 +28,13 @@ public class GUIController {
 
     @FXML
     private TextField selectedItemTextField;
+
+    @FXML
+    private Label inventoryLimitLabel;
+
+    @FXML
+    private Label inventoryWeightLabel;
+
 
     @FXML
     private void removeItemOnClick() {
@@ -69,6 +73,8 @@ public class GUIController {
         //Added loading the saved Inventory as the first part of initialize
         //TODO Proper exception handling is a TO-DO
         inventoryManager.loadingSavedInventory();
+
+        updateAllInventoryVariables();
 
         //------------------------------------
         //Viser valgt item fra inventoryListView i textfield
@@ -113,11 +119,29 @@ public class GUIController {
     //Forbinder addItemOnClick med inventory manager
     public void addItemToInventory(ItemId itemId) {
         inventoryManager.addItemToInventory(itemId);
+
+        //Updating inventory variables
+        updateAllInventoryVariables();
+
         //Added saving the inventory to the addItemFeature
         inventoryManager.savingInventory();
     }
 
     public void removeItemFromInventory(int inventoryindex) {
         inventoryManager.removeItemFromInventory(inventoryindex);
+
+        //Updating inventory variables
+        updateAllInventoryVariables();
+
+        //Added Saving the inventory to the removeItemFeature
+        inventoryManager.savingInventory();
+    }
+
+
+    public void updateAllInventoryVariables(){
+        inventoryManager.updateSlotsFilled();
+        inventoryLimitLabel.setText(inventoryManager.inventoryItemLimit());
+        inventoryManager.updateWeightFilled();
+        inventoryWeightLabel.setText(inventoryManager.inventoryWeightLimit());
     }
 }
