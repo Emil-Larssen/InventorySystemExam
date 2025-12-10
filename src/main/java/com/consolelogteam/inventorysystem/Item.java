@@ -20,7 +20,7 @@ public abstract class Item implements Serializable {
     }
 
     public String toString() {
-        return itemName + "   " + weight;
+        return itemName + "   " + weight + " kg";
     }
 
     public double getWeight() {

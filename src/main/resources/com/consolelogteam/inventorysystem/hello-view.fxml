@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.consolelogteam.inventorysystem.GUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.consolelogteam.inventorysystem.GUIController">
    <children>
       <ListView fx:id="inventoryListView" layoutX="332.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="removeItemButton" layoutX="401.0" layoutY="321.0" mnemonicParsing="false" onAction="#removeItemOnClick" text="Slet Item" />
@@ -22,8 +22,8 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ComboBox>
-      <Label fx:id="inventoryLimitLabel" layoutX="504.0" layoutY="300.0" />
-      <Label fx:id="inventoryWeightLabel" layoutX="504.0" layoutY="317.0" />
+      <Label fx:id="inventoryLimitLabel" layoutX="504.0" layoutY="305.0" />
+      <Label fx:id="inventoryWeightLabel" layoutX="504.0" layoutY="320.0" />
       <AnchorPane fx:id="errorMessageAnchorPane" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eff4f8" height="200.0" layoutX="138.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="324.0" />

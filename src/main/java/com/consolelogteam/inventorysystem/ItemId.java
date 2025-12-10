@@ -1,7 +1,16 @@
 package com.consolelogteam.inventorysystem;
 
 public enum ItemId {
-    GENERIC_WEAPON,
-    GENERIC_ARMOR,
-    GENERIC_CONSUMABLE
+    SWORD,
+    AXE,
+    DAGGER,
+    BOW,
+    HELMET,
+    BREASTPLATE,
+    GREAVES,
+    BOOTS,
+    HEALTH_POTION,
+    MANA_POTION,
+    ARROW,
+    BOMB,
 }

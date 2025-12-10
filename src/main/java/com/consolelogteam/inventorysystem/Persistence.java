@@ -36,9 +36,9 @@ public class Persistence {
 
             //TODO Exceptions are not properly caught TO-DO for later Exception handling
         } catch (FileNotFoundException fnfe){
-            throw new RuntimeException("No file was found to save to");
+            throw new RuntimeException("Der blev ikke fundet nogen fil at gemme til");
         } catch (IOException ioe) {
-            throw new RuntimeException("Something went wrong during saving the inventory");
+            throw new RuntimeException("Der gik noget galt i forbindelse med at gemme din inventory");
         }
     }
 

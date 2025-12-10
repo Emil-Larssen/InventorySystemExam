@@ -106,7 +106,15 @@ public class GUIController {
                 .selectedItemProperty()
                 .addListener((obs, oldItem, newItem) -> {
                     if (newItem != null) {
-                        selectedItemTextField.setText("Valgt item: " + newItem.getItemName());
+                        if (newItem instanceof Weapon){
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Våben");
+                        }
+                        if (newItem instanceof Armor){
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Rustning");
+                        }
+                        if (newItem instanceof Consumable){
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Konsumerbar");
+                        }
                     } else {
                         selectedItemTextField.setText("Ingen item valgt");
                     }
@@ -155,7 +163,7 @@ public class GUIController {
         updateAllInventoryVariables();
 
         //Added saving the inventory to the addItemFeature
-        inventoryManager.savingInventory();
+        savingInventory();
     }
 
     //Fjerner item fra inventory
@@ -166,7 +174,7 @@ public class GUIController {
         updateAllInventoryVariables();
 
         //Added Saving the inventory to the removeItemFeature
-        inventoryManager.savingInventory();
+        savingInventory();
     }
 
 
@@ -175,5 +183,14 @@ public class GUIController {
         inventoryLimitLabel.setText(inventoryManager.inventoryItemLimit());
         inventoryManager.updateWeightFilled();
         inventoryWeightLabel.setText(inventoryManager.inventoryWeightLimit());
+    }
+
+    public void savingInventory(){
+        try {
+            inventoryManager.savingInventory();
+        } catch (RuntimeException re) {
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.setText("Fejl ved Gem: " + re.getMessage());
+        }
     }
 }
