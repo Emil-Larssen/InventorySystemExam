@@ -127,6 +127,7 @@ public class GUIController {
         inventoryManager.savingInventory();
     }
 
+    //Fjerner item fra inventory
     public void removeItemFromInventory(int inventoryindex) {
         inventoryManager.removeItemFromInventory(inventoryindex);
 
