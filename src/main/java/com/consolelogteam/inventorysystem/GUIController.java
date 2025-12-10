@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import com.consolelogteam.inventorysystem.ItemId;
@@ -18,6 +19,9 @@ public class GUIController {
     List<ItemId> list = Arrays.asList(ItemId.values());
     ObservableList<ItemId> availableItems = FXCollections.observableArrayList(list);
 
+
+    @FXML
+    private ComboBox<String> sortingCombobox;
 
     @FXML
     private ListView<Item> inventoryListView;
@@ -36,6 +40,7 @@ public class GUIController {
         }
     }
 
+
     //Tilføjer en item til inventory
     @FXML
     private void addItemOnClick() {
@@ -44,6 +49,25 @@ public class GUIController {
             addItemToInventory(selectedId);
         }
     }
+
+    @FXML
+    private void sortingButtonOnClick() {
+        switch(sortingCombobox.getValue()) {
+            case "Sorter efter Navn":
+                inventoryManager.sortingAfterName();
+                break;
+            case "Sorter efter Vægt":
+                inventoryManager.sortingAfterWeight();
+                break;
+            default:
+        };
+
+    }
+
+
+
+
+
 
     @FXML
     public void initialize() {
@@ -70,7 +94,11 @@ public class GUIController {
         //--------------------------------
 
         itemListView.setItems(availableItems);
+
+        //-----------------------------------
+        sortingCombobox.getItems().addAll("Sorter efter Navn", "Sorter efter Vægt");
     }
+
 
     //Forbinder addItemOnClick med inventory manager
     public void addItemToInventory(ItemId itemId) {

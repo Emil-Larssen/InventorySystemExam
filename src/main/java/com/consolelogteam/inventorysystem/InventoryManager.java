@@ -29,6 +29,15 @@ public class InventoryManager {
         return inventory.getInventoryList();
     }
 
+    public void sortingAfterName() {
+        inventory.sortInventoryAlphabetically();
+
+    }
+
+    public void sortingAfterWeight() {
+        inventory.sortInventoryByWeight();
+    }
+
 
 
 
