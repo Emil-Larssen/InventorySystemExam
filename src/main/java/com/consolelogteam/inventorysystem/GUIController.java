@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.consolelogteam.inventorysystem.ItemId;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +35,18 @@ public class GUIController {
 
     @FXML
     private Label inventoryWeightLabel;
+
+    @FXML
+    private AnchorPane errorMessageAnchorPane;
+
+    @FXML
+    private TextArea errorMessageOutput;
+
+    @FXML
+    private void understoodButtonOnClick(){
+        errorMessageAnchorPane.setVisible(false);
+        errorMessageOutput.clear();
+    }
 
 
     @FXML
@@ -75,7 +88,13 @@ public class GUIController {
     public void initialize() {
         //Added loading the saved Inventory as the first part of initialize
         //TODO Proper exception handling is a TO-DO
-        inventoryManager.loadingSavedInventory();
+        try {
+            inventoryManager.loadingSavedInventory();
+        } catch (RuntimeException re) {
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.setText("Fejl ved Loading: " + re.getMessage());
+        }
+
 
         updateAllInventoryVariables();
 
@@ -121,7 +140,16 @@ public class GUIController {
 
     //Forbinder addItemOnClick med inventory manager
     public void addItemToInventory(ItemId itemId) {
-        inventoryManager.addItemToInventory(itemId);
+        try {
+            inventoryManager.addItemToInventory(itemId);
+
+        } catch (ExceedItemLimitException eile){
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.setText("Fejl ved Pladser: " + eile.getMessage());
+        } catch (ExceedWeightLimitException ewle){
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.setText("Fejl ved Vægt: " + ewle.getMessage());
+        }
 
         //Updating inventory variables
         updateAllInventoryVariables();

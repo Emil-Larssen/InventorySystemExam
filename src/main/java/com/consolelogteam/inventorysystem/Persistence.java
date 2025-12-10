@@ -18,11 +18,11 @@ public class Persistence {
 
             //TODO Exceptions are not properly caught TO-DO for later Exception handling
         } catch (FileNotFoundException fnfe) {
-            throw new RuntimeException("No saved file was found");
+            throw new RuntimeException("Der blev ikke fundet nogen gemt fil");
         } catch (ClassNotFoundException cnfe){
-            throw new RuntimeException("No class of that type was found");
+            throw new RuntimeException("Der blev ikke fundet en item");
         } catch (IOException ioe){
-            throw new RuntimeException("Something went wrong during loading the file of the inventory");
+            throw new RuntimeException("Der gik noget galt i forbindelse med at gendanne din inventory");
         }
     }
 
