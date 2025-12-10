@@ -112,6 +112,45 @@ public class Inventory {
             }
         }
     }
+    // bobble sortering efter type og alfabetisk rækkefølge
+    public void sortInventoryByType() {
+        boolean swappedSomething = true;
+
+        while (swappedSomething) {
+            swappedSomething = false;
+
+            for (int i = 0; i < inventoryList.size() - 1; i++) {
+                Item a = inventoryList.get(i);
+                Item b = inventoryList.get(i + 1);
+
+                /* "A".compareTo("B") < 0
+                   "B".compareTo("A") > 0
+                   "A".compareTo("A") == 0 */
+
+                int typeCompare = a.getItemType().compareTo(b.getItemType()); // sortere efter enum itemType rækkefølge
+                int nameCompare = 0;
+
+                if (typeCompare == 0) {
+                    // hvis itemType er ens vil den sortere alfabetisk i stedet
+                    nameCompare = a.getItemName().compareTo(b.getItemName());
+                }
+
+
+                /* (if) her siger at enten skal det første index være større end det andet (i forhold til typernes enum rækkefølge),
+                eller typerne er ens men det første navn er en større værdig end den anden i alfabetet og skal byttes fx("B"compareTo"A")
+                hvis en af disse er tilfældet bliver swappedSomething sat til true og sorteringen fortsætter */
+                if (typeCompare > 0 || (typeCompare == 0 && nameCompare > 0)) {
+                    swappedSomething = true;
+
+                    Item temp = a;
+                    inventoryList.set(i, b);
+                    inventoryList.set(i + 1, temp);
+
+
+                }
+            }
+        }
+    }
 
 
 
