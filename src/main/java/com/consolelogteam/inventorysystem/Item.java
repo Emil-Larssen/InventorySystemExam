@@ -26,4 +26,8 @@ public abstract class Item implements Serializable {
     public double getWeight() {
         return weight;
     }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
 }
