@@ -13,10 +13,10 @@ public class ItemFactory {
             case BREASTPLATE -> new Armor("Brystplade", 8, ArmorSlot.CHEST);
             case GREAVES -> new Armor("Benskinner", 3.5, ArmorSlot.LEGS);
             case BOOTS -> new Armor("Støvler", 2, ArmorSlot.FEET);
-            case HEALTH_POTION -> new Consumable("Liv eliksir", 0.2);
-            case MANA_POTION -> new Consumable("Mana eliksir", 0.2);
-            case ARROW -> new Consumable("Pil", 0.1);
-            case BOMB -> new Consumable("Bombe", 0.5);
+            case HEALTH_POTION -> new Consumable("Liv eliksir", 0.2, ItemId.HEALTH_POTION);
+            case MANA_POTION -> new Consumable("Mana eliksir", 0.2,  ItemId.MANA_POTION);
+            case ARROW -> new Consumable("Pil", 0.1, ItemId.ARROW);
+            case BOMB -> new Consumable("Bombe", 0.5, ItemId.BOMB);
 
             default -> null;
         };
