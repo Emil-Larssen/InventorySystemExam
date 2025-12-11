@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.consolelogteam.inventorysystem.GUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.consolelogteam.inventorysystem.GUIController">
    <children>
       <ListView fx:id="inventoryListView" layoutX="332.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="removeItemButton" layoutX="401.0" layoutY="321.0" mnemonicParsing="false" onAction="#removeItemOnClick" text="Slet Item" />
-      <TextField fx:id="selectedItemTextField" layoutX="153.0" layoutY="55.0" prefHeight="25.0" prefWidth="295.0" />
+      <TextField fx:id="selectedItemTextField" editable="false" layoutX="111.0" layoutY="23.0" prefHeight="26.0" prefWidth="377.0" />
       <ListView fx:id="itemListView" layoutX="69.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="addItemButton" layoutX="135.0" layoutY="321.0" mnemonicParsing="false" onAction="#addItemOnClick" text="Tilføj Item" />
       <ComboBox fx:id="sortingCombobox" layoutX="358.0" layoutY="354.0" onAction="#sortingButtonOnClick" prefWidth="150.0" promptText="Sorter">
@@ -22,8 +22,9 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ComboBox>
-      <Label fx:id="inventoryLimitLabel" layoutX="504.0" layoutY="305.0" />
-      <Label fx:id="inventoryWeightLabel" layoutX="504.0" layoutY="320.0" />
+      <Label fx:id="inventoryLimitLabel" alignment="CENTER" ellipsisString="" layoutX="331.0" layoutY="400.0" prefHeight="18.0" prefWidth="200.0" />
+      <Label fx:id="inventoryWeightLabel" alignment="CENTER" layoutX="331.0" layoutY="418.0" prefHeight="18.0" prefWidth="200.0" />
+      <Button layoutX="125.0" layoutY="387.0" mnemonicParsing="false" onAction="#increaseSlotsOnClick" text="Forøg Pladser" />
       <AnchorPane fx:id="errorMessageAnchorPane" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eff4f8" height="200.0" layoutX="138.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="324.0" />

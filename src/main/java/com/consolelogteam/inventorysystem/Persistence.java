@@ -16,7 +16,6 @@ public class Persistence {
 
             return FXCollections.observableArrayList(savedList);
 
-            //TODO Exceptions are not properly caught TO-DO for later Exception handling
         } catch (FileNotFoundException fnfe) {
             throw new RuntimeException("Der blev ikke fundet nogen gemt fil");
         } catch (ClassNotFoundException cnfe){
@@ -34,12 +33,13 @@ public class Persistence {
             objectOutput.writeObject(new ArrayList<Item>(listOfItems));
             objectOutput.flush();
 
-            //TODO Exceptions are not properly caught TO-DO for later Exception handling
         } catch (FileNotFoundException fnfe){
             throw new RuntimeException("Der blev ikke fundet nogen fil at gemme til");
         } catch (IOException ioe) {
             throw new RuntimeException("Der gik noget galt i forbindelse med at gemme din inventory");
         }
     }
+
+
 
 }

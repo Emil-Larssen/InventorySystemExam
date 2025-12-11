@@ -14,11 +14,11 @@ public class Inventory {
     private ItemFactory itemfactory = new ItemFactory();
 
     //inventory constraints
-    private final int STARTINGINVENTORYSLOTS = 32;
+    private final int STARTINGINVENTORYSLOTSANDINCREASEINCREMENT = 32;
     private final int MAXINVENTORYSLOTS = 192;
     private final double WEIGHTLIMIT = 50.0;
 
-    private int inventorySlotsLimit = STARTINGINVENTORYSLOTS;
+    private int inventorySlotsLimit = STARTINGINVENTORYSLOTSANDINCREASEINCREMENT;
 
     //Inventory overview
     private int slotsFilled = 0;
@@ -44,6 +44,18 @@ public class Inventory {
     protected void removeItem(int inventoryindex) {
         //Observable list remove() takes from-to indices. "to" being exclusive.
         inventoryList.remove(inventoryindex, inventoryindex+1);
+    }
+
+    public void setSlotLimit(int newLimit){
+        inventorySlotsLimit = newLimit;
+    }
+
+    public int getMaxInventorySlotLimit(){
+        return MAXINVENTORYSLOTS;
+    }
+
+    public int getIncrementInventorySlots(){
+        return STARTINGINVENTORYSLOTSANDINCREASEINCREMENT;
     }
 
     public int getItemSlotsLimit(){

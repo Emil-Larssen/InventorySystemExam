@@ -65,6 +65,14 @@ public class InventoryManager {
         }
     }
 
+    public void increasingSlotsLimit(){
+        if (inventory.getItemSlotsLimit() + inventory.getIncrementInventorySlots() <= inventory.getMaxInventorySlotLimit()){
+            inventory.setSlotLimit(inventory.getItemSlotsLimit()+inventory.getIncrementInventorySlots());
+        } else {
+            throw new MaxInventorySlotsReachedException("Du kan ikke forøge inventory pladser til mere end " + inventory.getMaxInventorySlotLimit());
+        }
+    }
+
     public ObservableList<Item> getItemList() {
         return inventory.getInventoryList();
     }

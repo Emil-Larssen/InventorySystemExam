@@ -85,6 +85,17 @@ public class GUIController {
     }
 
     @FXML
+    private void increaseSlotsOnClick(){
+        try {
+            inventoryManager.increasingSlotsLimit();
+            updateAllInventoryVariables();
+        } catch (MaxInventorySlotsReachedException misre){
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.setText("Fejl ved Forøgelse af Pladser: " + misre.getMessage());
+        }
+    }
+
+    @FXML
     public void initialize() {
         //Added loading the saved Inventory as the first part of initialize
         //TODO Proper exception handling is a TO-DO
@@ -147,7 +158,7 @@ public class GUIController {
 
 
     //Forbinder addItemOnClick med inventory manager
-    public void addItemToInventory(ItemId itemId) {
+    private void addItemToInventory(ItemId itemId) {
         try {
             inventoryManager.addItemToInventory(itemId);
 
@@ -167,7 +178,7 @@ public class GUIController {
     }
 
     //Fjerner item fra inventory
-    public void removeItemFromInventory(int inventoryindex, ItemId itemId) {
+    private void removeItemFromInventory(int inventoryindex, ItemId itemId) {
         inventoryManager.removeItemFromInventory(inventoryindex, itemId);
 
         //Updating inventory variables
@@ -178,14 +189,15 @@ public class GUIController {
     }
 
 
-    public void updateAllInventoryVariables(){
+
+    private void updateAllInventoryVariables(){
         inventoryManager.updateSlotsFilled();
         inventoryLimitLabel.setText(inventoryManager.inventoryItemLimit());
         inventoryManager.updateWeightFilled();
         inventoryWeightLabel.setText(inventoryManager.inventoryWeightLimit());
     }
 
-    public void savingInventory(){
+    private void savingInventory(){
         try {
             inventoryManager.savingInventory();
         } catch (RuntimeException re) {
