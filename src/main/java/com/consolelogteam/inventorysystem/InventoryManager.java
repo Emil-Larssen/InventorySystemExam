@@ -65,7 +65,7 @@ public class InventoryManager {
         }
     }
 
-    public ObservableList getItemList() {
+    public ObservableList<Item> getItemList() {
         return inventory.getInventoryList();
     }
 
@@ -102,7 +102,7 @@ public class InventoryManager {
     }
 
     public String inventoryWeightLimit() {
-        return "Vægt: " + inventory.getWeightFilled() + " kg" + " / " + inventory.getWeightLimit() + " kg";
+        return "Vægt: " + inventory.getWeightFilled()  + " kg" + " / " + inventory.getWeightLimit() + " kg";
     }
 
 

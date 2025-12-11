@@ -124,7 +124,7 @@ public class GUIController {
 
         //--------------------------------
         //Viser valgt item fra itemListView i textfield
-        itemListView.setItems(inventoryManager.getItemList());
+        itemListView.setItems(availableItems);
 
         itemListView.getSelectionModel()
                 .selectedItemProperty()
@@ -139,7 +139,7 @@ public class GUIController {
         selectedItemTextField.setText("Ingen item valgt");
 
 
-        itemListView.setItems(availableItems);
+
 
         //-----------------------------------
         sortingCombobox.getItems().addAll("Sorter efter Navn", "Sorter efter Vægt", "Sorter efter Kategori");
