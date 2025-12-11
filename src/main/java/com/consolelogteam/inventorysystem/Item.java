@@ -8,11 +8,13 @@ public abstract class Item implements Serializable {
     private String itemName;
     private double weight;
     private ItemType itemType;
+    private ItemId itemId;
 
-    public Item(String itemName, double weight, ItemType itemType) {
+    public Item(String itemName, double weight, ItemType itemType, ItemId itemId) {
         this.itemName = itemName;
         this.itemType = itemType;
         this.weight = weight;
+        this.itemId = itemId;
     }
 
     public String getItemName() {
@@ -30,4 +32,9 @@ public abstract class Item implements Serializable {
     public ItemType getItemType() {
         return itemType;
     }
+
+    public ItemId getItemId(){
+        return itemId;
+    }
+
 }

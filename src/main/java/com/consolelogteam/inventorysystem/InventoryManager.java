@@ -19,19 +19,50 @@ public class InventoryManager {
     }
 
     public void addItemToInventory(ItemId itemId) {
-        if (inventory.getSlotsFilled() < inventory.getItemSlotsLimit()) {
+        boolean existsInInventory = false;
+
+        if (inventory.tempMakeItem(itemId) instanceof Consumable){
             if (inventory.getWeightFilled() + (inventory.tempMakeItem(itemId).getWeight()) <= inventory.getWeightLimit()) {
-                inventory.addItem(itemId);
-            } else {
-                throw new ExceedWeightLimitException("Du må ikke overskride den maksimale vægt");
+                for (Item item : inventory.getInventoryList()) {
+                    if (item instanceof Consumable) {
+                        if (item.getItemId() == itemId) {
+                            ((Consumable) item).incrementStacksize();
+                            existsInInventory = true;
+                        }
+                    }
+                }
             }
-        } else {
-            throw new ExceedItemLimitException("Du må ikke overskride det maksimale antal items");
+        }
+        if (!existsInInventory) {
+            if (inventory.getSlotsFilled() < inventory.getItemSlotsLimit()) {
+                if (inventory.getWeightFilled() + (inventory.tempMakeItem(itemId).getWeight()) <= inventory.getWeightLimit()) {
+                    inventory.addItem(itemId);
+                } else {
+                    throw new ExceedWeightLimitException("Du må ikke overskride den maksimale vægt");
+                }
+            } else {
+                throw new ExceedItemLimitException("Du må ikke overskride det maksimale antal items");
+            }
         }
     }
 
-    public void removeItemFromInventory(int inventoryindex) {
-        inventory.removeItem(inventoryindex);
+    public void removeItemFromInventory(int inventoryIndex, ItemId itemId) {
+        boolean existsInInventory = false;
+        if (inventory.tempMakeItem(itemId) instanceof Consumable){
+            for (Item item : inventory.getInventoryList()){
+                if (item instanceof Consumable){
+                    if (item.getItemId() == itemId){
+                        ((Consumable) item).decrementStacksize();
+                        if (((Consumable) item).getStacksize() != 0) {
+                            existsInInventory = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (!existsInInventory) {
+            inventory.removeItem(inventoryIndex);
+        }
     }
 
     public ObservableList getItemList() {
@@ -61,13 +92,17 @@ public class InventoryManager {
     public void updateWeightFilled() {
         double weight = 0;
         for (Item item : inventory.getInventoryList()) {
-            weight += item.getWeight();
+            if (item instanceof Consumable){
+                weight += item.getWeight() * ((Consumable) item).getStacksize();
+            } else {
+                weight += item.getWeight();
+            }
         }
         inventory.setWeightFilled(weight);
     }
 
     public String inventoryWeightLimit() {
-        return "Vægt: " + inventory.getWeightFilled() + " / " + inventory.getWeightLimit();
+        return "Vægt: " + inventory.getWeightFilled() + " kg" + " / " + inventory.getWeightLimit() + " kg";
     }
 
 

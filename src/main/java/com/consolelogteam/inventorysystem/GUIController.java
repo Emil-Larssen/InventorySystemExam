@@ -53,7 +53,7 @@ public class GUIController {
     private void removeItemOnClick() {
         Item item = inventoryListView.getSelectionModel().getSelectedItem();
         if (item != null) {
-            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex());
+            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(), inventoryListView.getSelectionModel().getSelectedItem().getItemId());
         }
     }
 
@@ -113,7 +113,7 @@ public class GUIController {
                             selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Rustning");
                         }
                         if (newItem instanceof Consumable){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Konsumerbar");
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() * ((Consumable) newItem).getStacksize() + " kg " + " antal: " + ((Consumable) newItem).getStacksize() + "  -  Konsumerbar");
                         }
                     } else {
                         selectedItemTextField.setText("Ingen item valgt");
@@ -167,8 +167,8 @@ public class GUIController {
     }
 
     //Fjerner item fra inventory
-    public void removeItemFromInventory(int inventoryindex) {
-        inventoryManager.removeItemFromInventory(inventoryindex);
+    public void removeItemFromInventory(int inventoryindex, ItemId itemId) {
+        inventoryManager.removeItemFromInventory(inventoryindex, itemId);
 
         //Updating inventory variables
         updateAllInventoryVariables();

@@ -2,8 +2,8 @@ package com.consolelogteam.inventorysystem;
 
 public class Armor extends Item {
     private ArmorSlot armorslot;
-    public Armor(String itemName, double weight, ArmorSlot armorslot ) {
-        super(itemName, weight, ItemType.ARMOR);
+    public Armor(String itemName, double weight, ArmorSlot armorslot, ItemId itemId ) {
+        super(itemName, weight, ItemType.ARMOR, itemId);
         this.armorslot = armorslot;
     }
 }

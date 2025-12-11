@@ -106,7 +106,24 @@ public class Inventory {
             swappedSomething = false;
 
             for (int i = 0; i < inventoryList.size() - 1; i++) {
-                if (inventoryList.get(i).getWeight() > inventoryList.get(i + 1).getWeight()) {
+
+                //I have added a check that makes sure to differentiate between stackables, so that total weight is taken into account
+                double weightOfFirst;
+                double weightOfSecond;
+
+                if (inventoryList.get(i) instanceof Consumable){
+                    weightOfFirst = inventoryList.get(i).getWeight() * ((Consumable) inventoryList.get(i)).getStacksize();
+                } else {
+                    weightOfFirst = inventoryList.get(i).getWeight();
+                }
+
+                if (inventoryList.get(i+1) instanceof Consumable){
+                    weightOfSecond = inventoryList.get(i+1).getWeight() * ((Consumable) inventoryList.get(i+1)).getStacksize();
+                } else {
+                   weightOfSecond = inventoryList.get(i + 1).getWeight();
+                }
+
+                if (weightOfFirst > weightOfSecond) {
                     swappedSomething = true;
 
 
