@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem;
+package com.consolelogteam.inventorysystem.Exceptions;
 
 public class MaxInventorySlotsReachedException extends RuntimeException {
     public MaxInventorySlotsReachedException(String message) {

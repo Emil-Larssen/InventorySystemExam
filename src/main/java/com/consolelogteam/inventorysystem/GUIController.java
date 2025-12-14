@@ -1,10 +1,13 @@
 package com.consolelogteam.inventorysystem;
 
+import com.consolelogteam.inventorysystem.Exceptions.ExceedItemLimitException;
+import com.consolelogteam.inventorysystem.Exceptions.ExceedWeightLimitException;
+import com.consolelogteam.inventorysystem.Exceptions.MaxInventorySlotsReachedException;
+import com.consolelogteam.inventorysystem.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import com.consolelogteam.inventorysystem.ItemId;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Arrays;
@@ -89,6 +92,12 @@ public class GUIController {
         try {
             inventoryManager.increasingSlotsLimit();
             updateAllInventoryVariables();
+            try {
+                inventoryManager.saveInventorySlots();
+            } catch (RuntimeException re) {
+                errorMessageOutput.appendText("\nFejl ved Gem af Inventory Pladser: " + re.getMessage());
+            }
+
         } catch (MaxInventorySlotsReachedException misre){
             errorMessageAnchorPane.setVisible(true);
             errorMessageOutput.setText("Fejl ved Forøgelse af Pladser: " + misre.getMessage());
@@ -98,14 +107,29 @@ public class GUIController {
     @FXML
     public void initialize() {
         //Added loading the saved Inventory as the first part of initialize
-        //TODO Proper exception handling is a TO-DO
         try {
             inventoryManager.loadingSavedInventory();
         } catch (RuntimeException re) {
             errorMessageAnchorPane.setVisible(true);
-            errorMessageOutput.setText("Fejl ved Loading: " + re.getMessage());
+            errorMessageOutput.setText("Fejl ved Gendannelse af Inventory: " + re.getMessage());
         }
 
+        updateAllInventoryVariables();
+
+        //Added loading of the saved inventory of slots
+        try {
+            inventoryManager.loadInventorySlots();
+        } catch (RuntimeException re) {
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.appendText("\nFejl ved Gendannelse af Inventory Pladser: " + re.getMessage());
+
+            //In case an error has occurred the new calculated inventory slots should be properly saved
+            try {
+                inventoryManager.saveInventorySlots();
+            } catch (RuntimeException re2) {
+                errorMessageOutput.appendText("\nFejl ved Gem af Inventory Pladser: " + re2.getMessage());
+            }
+        }
 
         updateAllInventoryVariables();
 

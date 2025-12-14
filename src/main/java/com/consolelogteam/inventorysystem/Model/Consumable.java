@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem;
+package com.consolelogteam.inventorysystem.Model;
 
 public class Consumable extends Item {
 

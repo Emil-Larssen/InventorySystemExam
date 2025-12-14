@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem;
+package com.consolelogteam.inventorysystem.Exceptions;
 
 public class ExceedItemLimitException extends RuntimeException {
     public ExceedItemLimitException(String message) {

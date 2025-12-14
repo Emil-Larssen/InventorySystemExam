@@ -1,7 +1,15 @@
 package com.consolelogteam.inventorysystem;
 
-import com.consolelogteam.inventorysystem.ItemId;
+import com.consolelogteam.inventorysystem.Exceptions.ExceedItemLimitException;
+import com.consolelogteam.inventorysystem.Exceptions.ExceedWeightLimitException;
+import com.consolelogteam.inventorysystem.Exceptions.MaxInventorySlotsReachedException;
+import com.consolelogteam.inventorysystem.Model.Consumable;
+import com.consolelogteam.inventorysystem.Model.Item;
+import com.consolelogteam.inventorysystem.Model.ItemId;
 import javafx.collections.ObservableList;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class InventoryManager {
     private Inventory inventory = new Inventory();
@@ -65,6 +73,40 @@ public class InventoryManager {
         }
     }
 
+    public void loadInventorySlots(){
+        try {
+            int loadedInventorySlots = persistence.loadAmountOfInventorySlots();
+            if (loadedInventorySlots >= inventory.getStartingInventorySlots() && loadedInventorySlots <= inventory.getMaxInventorySlotLimit()){
+                if (loadedInventorySlots >= inventory.getSlotsFilled()){
+                    inventory.setSlotLimit(loadedInventorySlots);
+                } else {
+                    inventory.setSlotLimit(calculateNeededSlots());
+                    throw new RuntimeException("Der blev fundet et antal inventory pladser som var mindre end det nødvendige");
+                }
+            } else {
+                inventory.setSlotLimit(calculateNeededSlots());
+                throw new RuntimeException("Der blev fundet et antal inventory pladser som er over minimum og under maksimum");
+            }
+
+        } catch (FileNotFoundException fnfe){
+            inventory.setSlotLimit(calculateNeededSlots());
+            throw new RuntimeException("Der blev ikke fundet en fil til gemte inventory pladser");
+
+        } catch (IOException ioe){
+            inventory.setSlotLimit(calculateNeededSlots());
+            throw new RuntimeException("Der gik noget galt i forbindelse med at gendanne inventory pladser");
+
+        } catch (NumberFormatException nfe){
+            inventory.setSlotLimit(calculateNeededSlots());
+            throw new RuntimeException("Der blev ikke fundet et heltal i den gemte fil");
+        }
+    }
+
+    public void saveInventorySlots(){
+        persistence.saveAmountOfInventorySlots(inventory.getItemSlotsLimit());
+    }
+
+
     public void increasingSlotsLimit(){
         if (inventory.getItemSlotsLimit() + inventory.getIncrementInventorySlots() <= inventory.getMaxInventorySlotLimit()){
             inventory.setSlotLimit(inventory.getItemSlotsLimit()+inventory.getIncrementInventorySlots());
@@ -113,5 +155,13 @@ public class InventoryManager {
         return "Vægt: " + inventory.getWeightFilled()  + " kg" + " / " + inventory.getWeightLimit() + " kg";
     }
 
+
+    public int calculateNeededSlots(){
+        int calculatedSlots = inventory.getStartingInventorySlots();
+        while(calculatedSlots < inventory.getSlotsFilled()){
+            calculatedSlots += inventory.getIncrementInventorySlots();
+        }
+        return calculatedSlots;
+    }
 
 }

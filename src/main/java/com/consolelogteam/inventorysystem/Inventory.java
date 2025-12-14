@@ -1,12 +1,9 @@
 package com.consolelogteam.inventorysystem;
+import com.consolelogteam.inventorysystem.Model.Consumable;
+import com.consolelogteam.inventorysystem.Model.Item;
+import com.consolelogteam.inventorysystem.Model.ItemId;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
-
-
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class Inventory {
 
@@ -14,11 +11,12 @@ public class Inventory {
     private ItemFactory itemfactory = new ItemFactory();
 
     //inventory constraints
-    private final int STARTINGINVENTORYSLOTSANDINCREASEINCREMENT = 32;
+    private final int STARTINGINVENTORYSLOTS = 32;
+    private final int INCREMENTINCREASESLOTS = 32;
     private final int MAXINVENTORYSLOTS = 192;
     private final double WEIGHTLIMIT = 50.0;
 
-    private int inventorySlotsLimit = STARTINGINVENTORYSLOTSANDINCREASEINCREMENT;
+    private int inventorySlotsLimit = STARTINGINVENTORYSLOTS;
 
     //Inventory overview
     private int slotsFilled = 0;
@@ -54,8 +52,12 @@ public class Inventory {
         return MAXINVENTORYSLOTS;
     }
 
+    public int getStartingInventorySlots(){
+        return STARTINGINVENTORYSLOTS;
+    }
+
     public int getIncrementInventorySlots(){
-        return STARTINGINVENTORYSLOTSANDINCREASEINCREMENT;
+        return INCREMENTINCREASESLOTS;
     }
 
     public int getItemSlotsLimit(){

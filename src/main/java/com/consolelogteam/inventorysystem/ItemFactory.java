@@ -1,5 +1,7 @@
 package com.consolelogteam.inventorysystem;
 
+import com.consolelogteam.inventorysystem.Model.*;
+
 public class ItemFactory {
 
     public Item createItem(ItemId itemId) {

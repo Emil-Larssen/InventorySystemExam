@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem;
+package com.consolelogteam.inventorysystem.Model;
 
 import java.io.Serializable;
 

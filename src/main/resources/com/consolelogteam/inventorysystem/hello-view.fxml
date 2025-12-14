@@ -25,12 +25,12 @@
       <Label fx:id="inventoryLimitLabel" alignment="CENTER" ellipsisString="" layoutX="331.0" layoutY="400.0" prefHeight="18.0" prefWidth="200.0" />
       <Label fx:id="inventoryWeightLabel" alignment="CENTER" layoutX="331.0" layoutY="418.0" prefHeight="18.0" prefWidth="200.0" />
       <Button layoutX="125.0" layoutY="387.0" mnemonicParsing="false" onAction="#increaseSlotsOnClick" text="Forøg Pladser" />
-      <AnchorPane fx:id="errorMessageAnchorPane" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="errorMessageAnchorPane" prefHeight="474.0" prefWidth="600.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eff4f8" height="200.0" layoutX="138.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" width="324.0" />
-            <TextArea fx:id="errorMessageOutput" editable="false" layoutX="200.0" layoutY="117.0" prefHeight="76.0" prefWidth="200.0" promptText="Her er fejl beskeden" wrapText="true" />
+            <TextArea fx:id="errorMessageOutput" editable="false" layoutX="154.0" layoutY="105.0" prefHeight="95.0" prefWidth="291.0" promptText="Her er fejl beskeden" wrapText="true" />
             <Button layoutX="275.0" layoutY="211.0" mnemonicParsing="false" onAction="#understoodButtonOnClick" text="Forstået" />
-            <Label layoutX="264.0" layoutY="87.0" text="Fejl Meddelse" />
+            <Label layoutX="263.0" layoutY="77.0" text="Fejl Meddelse" />
          </children>
       </AnchorPane>
    </children>
