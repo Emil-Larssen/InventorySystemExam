@@ -10,7 +10,7 @@ public class Inventory {
     private ObservableList<Item> inventoryList = FXCollections.observableArrayList();
     private ItemFactory itemfactory = new ItemFactory();
 
-    //inventory constraints
+    /** Inventory constraints */
     private final int STARTINGINVENTORYSLOTS = 32;
     private final int INCREMENTINCREASESLOTS = 32;
     private final int MAXINVENTORYSLOTS = 192;
@@ -18,40 +18,22 @@ public class Inventory {
 
     private int inventorySlotsLimit = STARTINGINVENTORYSLOTS;
 
-    //Inventory overview
+    /** Inventory Variables */
     private int slotsFilled = 0;
     private double weightFilled = 0;
 
 
-    public void loadSavedList(ObservableList<Item> savedList){
-        inventoryList = savedList;
-    }
-
+    /** Getters */
     public ObservableList<Item> getInventoryList() {
         return inventoryList;
     }
 
-    public Item tempMakeItem(ItemId itemId){
-         return itemfactory.createItem(itemId);
-    }
-
-
-    public void addItem(ItemId itemid) {
-        inventoryList.add(itemfactory.createItem(itemid));
-    }
-    protected void removeItem(int inventoryindex) {
-        //Observable list remove() takes from-to indices. "to" being exclusive.
-        inventoryList.remove(inventoryindex, inventoryindex+1);
-    }
-
-    public void setSlotLimit(int newLimit){
-        inventorySlotsLimit = newLimit;
-    }
 
     public int getMaxInventorySlotLimit(){
         return MAXINVENTORYSLOTS;
     }
 
+    //Inventory Slots
     public int getStartingInventorySlots(){
         return STARTINGINVENTORYSLOTS;
     }
@@ -68,10 +50,7 @@ public class Inventory {
         return slotsFilled;
     }
 
-    public void setSlotsFilled(int slotsFilled){
-        this.slotsFilled = slotsFilled;
-    }
-
+    //Weight
     public double getWeightLimit(){
         return WEIGHTLIMIT;
     }
@@ -80,17 +59,48 @@ public class Inventory {
         return weightFilled;
     }
 
-    public void setWeightFilled(double weightFilled){
-        this.weightFilled = weightFilled;
-    }
-
     public int getInventoryLength(){
         return inventoryList.size();
     }
 
 
+    /** Setters */
+    public void setSlotLimit(int newLimit){
+        inventorySlotsLimit = newLimit;
+    }
+
+    public void setSlotsFilled(int slotsFilled){
+        this.slotsFilled = slotsFilled;
+    }
+
+    public void setWeightFilled(double weightFilled){
+        this.weightFilled = weightFilled;
+    }
 
 
+    /** Adding and removing Items from Inventory */
+    public void addItem(ItemId itemid) {
+        inventoryList.add(itemfactory.createItem(itemid));
+    }
+    protected void removeItem(int inventoryindex) {
+        //Observable list remove() takes from-to indices. "to" being exclusive.
+        inventoryList.remove(inventoryindex, inventoryindex+1);
+    }
+
+
+    /** Loading the Saved List */
+    public void loadSavedList(ObservableList<Item> savedList){
+        inventoryList = savedList;
+    }
+
+
+    /** Temporarily make an Item for Logic Purposes */
+    public Item tempMakeItem(ItemId itemId){
+         return itemfactory.createItem(itemId);
+    }
+
+
+    /** Sorting of Inventory */
     // bobble sortering Alfabetisk
     public void sortInventoryAlphabetically() {
         boolean swappedSomething = true;

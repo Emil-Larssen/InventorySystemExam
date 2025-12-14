@@ -21,6 +21,7 @@ public class GUIController {
     ObservableList<ItemId> availableItems = FXCollections.observableArrayList(list);
 
 
+    /** Scenebuilder Elements   */
     @FXML
     private ComboBox<String> sortingCombobox;
 
@@ -45,65 +46,8 @@ public class GUIController {
     @FXML
     private TextArea errorMessageOutput;
 
-    @FXML
-    private void understoodButtonOnClick(){
-        errorMessageAnchorPane.setVisible(false);
-        errorMessageOutput.clear();
-    }
 
-
-    @FXML
-    private void removeItemOnClick() {
-        Item item = inventoryListView.getSelectionModel().getSelectedItem();
-        if (item != null) {
-            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(), inventoryListView.getSelectionModel().getSelectedItem().getItemId());
-        }
-    }
-
-
-    //Tilføjer en item til inventory
-    @FXML
-    private void addItemOnClick() {
-        ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
-        if (selectedId != null) {
-            addItemToInventory(selectedId);
-        }
-    }
-
-    //Henter sorterings algoritmer fra InventoryManager/inventory.
-    @FXML
-    private void sortingButtonOnClick() {
-        switch (sortingCombobox.getValue()) {
-            case "Sorter efter Navn":
-                inventoryManager.sortingAfterName();
-                break;
-            case "Sorter efter Vægt":
-                inventoryManager.sortingAfterWeight();
-                break;
-            case "Sorter efter Kategori":
-                inventoryManager.sortInventoryByType();
-                break;
-            default:
-        }
-    }
-
-    @FXML
-    private void increaseSlotsOnClick(){
-        try {
-            inventoryManager.increasingSlotsLimit();
-            updateAllInventoryVariables();
-            try {
-                inventoryManager.saveInventorySlots();
-            } catch (RuntimeException re) {
-                errorMessageOutput.appendText("\nFejl ved Gem af Inventory Pladser: " + re.getMessage());
-            }
-
-        } catch (MaxInventorySlotsReachedException misre){
-            errorMessageAnchorPane.setVisible(true);
-            errorMessageOutput.setText("Fejl ved Forøgelse af Pladser: " + misre.getMessage());
-        }
-    }
-
+    /**  Code Run On Start-Up */
     @FXML
     public void initialize() {
         //Added loading the saved Inventory as the first part of initialize
@@ -173,14 +117,72 @@ public class GUIController {
 
         selectedItemTextField.setText("Ingen item valgt");
 
-
-
-
         //-----------------------------------
         sortingCombobox.getItems().addAll("Sorter efter Navn", "Sorter efter Vægt", "Sorter efter Kategori");
     }
 
 
+    /** Buttons and ComboBoxes */
+    @FXML
+    private void understoodButtonOnClick(){
+        errorMessageAnchorPane.setVisible(false);
+        errorMessageOutput.clear();
+    }
+
+    @FXML
+    private void removeItemOnClick() {
+        Item item = inventoryListView.getSelectionModel().getSelectedItem();
+        if (item != null) {
+            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(), inventoryListView.getSelectionModel().getSelectedItem().getItemId());
+        }
+    }
+
+    //Tilføjer en item til inventory
+    @FXML
+    private void addItemOnClick() {
+        ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
+        if (selectedId != null) {
+            addItemToInventory(selectedId);
+        }
+    }
+
+    @FXML
+    private void increaseSlotsOnClick(){
+        try {
+            inventoryManager.increasingSlotsLimit();
+            updateAllInventoryVariables();
+            try {
+                inventoryManager.saveInventorySlots();
+            } catch (RuntimeException re) {
+                errorMessageOutput.appendText("\nFejl ved Gem af Inventory Pladser: " + re.getMessage());
+            }
+
+        } catch (MaxInventorySlotsReachedException misre){
+            errorMessageAnchorPane.setVisible(true);
+            errorMessageOutput.setText("Fejl ved Forøgelse af Pladser: " + misre.getMessage());
+        }
+    }
+
+
+    //Henter sorterings algoritmer fra InventoryManager/inventory.
+    @FXML
+    private void sortingButtonOnClick() {
+        switch (sortingCombobox.getValue()) {
+            case "Sorter efter Navn":
+                inventoryManager.sortingAfterName();
+                break;
+            case "Sorter efter Vægt":
+                inventoryManager.sortingAfterWeight();
+                break;
+            case "Sorter efter Kategori":
+                inventoryManager.sortInventoryByType();
+                break;
+            default:
+        }
+    }
+
+
+    /** Commonly Used Defined Methods */
     //Forbinder addItemOnClick med inventory manager
     private void addItemToInventory(ItemId itemId) {
         try {
@@ -212,21 +214,21 @@ public class GUIController {
         savingInventory();
     }
 
-
-
+    //Updates all inventory variables
     private void updateAllInventoryVariables(){
         inventoryManager.updateSlotsFilled();
-        inventoryLimitLabel.setText(inventoryManager.inventoryItemLimit());
+        inventoryLimitLabel.setText(inventoryManager.printItemLimit());
         inventoryManager.updateWeightFilled();
-        inventoryWeightLabel.setText(inventoryManager.inventoryWeightLimit());
+        inventoryWeightLabel.setText(inventoryManager.printWeightLimit());
     }
 
+    //Saves the inventory
     private void savingInventory(){
         try {
             inventoryManager.savingInventory();
         } catch (RuntimeException re) {
             errorMessageAnchorPane.setVisible(true);
-            errorMessageOutput.setText("Fejl ved Gem: " + re.getMessage());
+            errorMessageOutput.setText("Fejl ved Gem af Inventory: " + re.getMessage());
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Persistence {
 
-    //Loading and saving of Inventory List
+    /** Loading and saving of Inventory List */
 
     public ObservableList<Item> loadListOfItems(){
         try(ObjectInputStream objectInput = new ObjectInputStream((new FileInputStream("SavedItems.ser")))){
@@ -44,7 +44,7 @@ public class Persistence {
     }
 
 
-    //Loading and Saving of Inventory Slots
+    /** Loading and Saving of Inventory Slots */
 
     public int loadAmountOfInventorySlots() throws  FileNotFoundException, IOException, NumberFormatException{
         try (BufferedReader reader = new BufferedReader(new FileReader("InventorySlotsAmount.txt"))){
