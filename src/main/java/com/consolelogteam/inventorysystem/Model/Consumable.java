@@ -22,7 +22,7 @@ public class Consumable extends Item {
 
     @Override
     public String toString() {
-        return getItemName() + "   " + String.format("%.2f",getWeight() * getStacksize()) + " kg";
+        return getItemName() + "   " + String.format("%.2f",getWeight() * getStacksize()) + " kg" + "   antal " + stacksize ;
     }
 
 }
