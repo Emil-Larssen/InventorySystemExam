@@ -86,13 +86,13 @@ public class GUIController {
                 .addListener((obs, oldItem, newItem) -> {
                     if (newItem != null) {
                         if (newItem instanceof Weapon){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Våben");
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f",newItem.getWeight()) + " kg  -  Våben");
                         }
                         if (newItem instanceof Armor){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() + " kg  -  Rustning");
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f",newItem.getWeight())  + " kg  -  Rustning");
                         }
                         if (newItem instanceof Consumable){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + newItem.getWeight() * ((Consumable) newItem).getStacksize() + " kg " + " antal: " + ((Consumable) newItem).getStacksize() + "  -  Konsumerbar");
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f",newItem.getWeight() * ((Consumable) newItem).getStacksize())  + " kg " + " antal: " + ((Consumable) newItem).getStacksize() + "  -  Konsumerbar");
                         }
                     } else {
                         selectedItemTextField.setText("Ingen item valgt");

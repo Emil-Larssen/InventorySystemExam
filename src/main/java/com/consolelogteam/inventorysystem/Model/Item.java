@@ -22,7 +22,7 @@ public abstract class Item implements Serializable {
     }
 
     public String toString() {
-        return itemName + "   " + weight + " kg";
+        return itemName + "   " + String.format("%.2f",weight)  + " kg";
     }
 
     public double getWeight() {

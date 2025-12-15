@@ -151,7 +151,7 @@ public class InventoryManager {
     }
 
     public String printWeightLimit() {
-        return "Vægt: " + inventory.getWeightFilled()  + " kg" + " / " + inventory.getWeightLimit() + " kg";
+        return "Vægt: " + String.format("%.2f",inventory.getWeightFilled())  + " kg" + " / " + String.format("%.2f",inventory.getWeightLimit()) + " kg";
     }
 
 
