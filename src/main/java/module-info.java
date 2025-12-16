@@ -7,6 +7,10 @@ module com.consolelogteam.inventorysystem {
     exports com.consolelogteam.inventorysystem;
     exports com.consolelogteam.inventorysystem.Exceptions;
     opens com.consolelogteam.inventorysystem.Exceptions to javafx.fxml;
-    exports com.consolelogteam.inventorysystem.Model;
-    opens com.consolelogteam.inventorysystem.Model to javafx.fxml;
+    exports com.consolelogteam.inventorysystem.UI;
+    opens com.consolelogteam.inventorysystem.UI to javafx.fxml;
+    exports com.consolelogteam.inventorysystem.Logik;
+    opens com.consolelogteam.inventorysystem.Logik to javafx.fxml;
+    exports com.consolelogteam.inventorysystem.Dal;
+    opens com.consolelogteam.inventorysystem.Dal to javafx.fxml;
 }

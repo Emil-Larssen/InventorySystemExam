@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem.Model;
+package com.consolelogteam.inventorysystem.Logik;
 
 public class Weapon extends Item {
 

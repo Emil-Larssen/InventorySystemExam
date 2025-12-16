@@ -1,6 +1,4 @@
-package com.consolelogteam.inventorysystem;
-
-import com.consolelogteam.inventorysystem.Model.*;
+package com.consolelogteam.inventorysystem.Logik;
 
 public class ItemFactory {
 

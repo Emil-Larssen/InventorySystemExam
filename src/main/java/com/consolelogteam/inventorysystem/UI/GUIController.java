@@ -1,9 +1,9 @@
-package com.consolelogteam.inventorysystem;
+package com.consolelogteam.inventorysystem.UI;
 
 import com.consolelogteam.inventorysystem.Exceptions.ExceedItemLimitException;
 import com.consolelogteam.inventorysystem.Exceptions.ExceedWeightLimitException;
 import com.consolelogteam.inventorysystem.Exceptions.MaxInventorySlotsReachedException;
-import com.consolelogteam.inventorysystem.Model.*;
+import com.consolelogteam.inventorysystem.Logik.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -148,11 +148,10 @@ public class GUIController {
     private void addItemOnClick() {
         ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
         if (selectedId != null) {
-            addItemToInventory(selectedId);
+            addingItemToInventory(selectedId);
 
             inventoryListView.refresh();
         }
-
     }
 
     @FXML
@@ -193,7 +192,7 @@ public class GUIController {
 
     /** Commonly Used Defined Methods */
     //Forbinder addItemOnClick med inventory manager
-    private void addItemToInventory(ItemId itemId) {
+    private void addingItemToInventory(ItemId itemId) {
         try {
             inventoryManager.addItemToInventory(itemId);
 

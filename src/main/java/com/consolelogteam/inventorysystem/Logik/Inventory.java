@@ -1,7 +1,4 @@
-package com.consolelogteam.inventorysystem;
-import com.consolelogteam.inventorysystem.Model.Consumable;
-import com.consolelogteam.inventorysystem.Model.Item;
-import com.consolelogteam.inventorysystem.Model.ItemId;
+package com.consolelogteam.inventorysystem.Logik;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
