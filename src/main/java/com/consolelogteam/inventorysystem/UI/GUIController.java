@@ -154,6 +154,7 @@ public class GUIController {
         }
     }
 
+
     @FXML
     private void increaseSlotsOnClick(){
         try {
