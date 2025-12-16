@@ -134,7 +134,13 @@ public class GUIController {
         Item item = inventoryListView.getSelectionModel().getSelectedItem();
         if (item != null) {
             removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(), inventoryListView.getSelectionModel().getSelectedItem().getItemId());
+
+            if (item instanceof Consumable){
+                inventoryListView.refresh();
+                selectedItemTextField.setText("Valgt item:  " + item.getItemName() + "  " + String.format("%.2f",item.getWeight() * ((Consumable) item).getStacksize())  + " kg " + " antal: " + ((Consumable) item).getStacksize() + "  -  Konsumerbar");
+            }
         }
+
     }
 
     //Tilføjer en item til inventory
@@ -143,7 +149,10 @@ public class GUIController {
         ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
         if (selectedId != null) {
             addItemToInventory(selectedId);
+
+            inventoryListView.refresh();
         }
+
     }
 
     @FXML
