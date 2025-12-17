@@ -1,6 +1,6 @@
-package com.consolelogteam.inventorysystem.Dal;
+package com.consolelogteam.inventorysystem.dal;
 
-import com.consolelogteam.inventorysystem.Logik.Item;
+import com.consolelogteam.inventorysystem.logik.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

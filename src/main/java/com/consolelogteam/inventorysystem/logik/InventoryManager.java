@@ -1,9 +1,9 @@
-package com.consolelogteam.inventorysystem.Logik;
+package com.consolelogteam.inventorysystem.logik;
 
-import com.consolelogteam.inventorysystem.Exceptions.ExceedItemLimitException;
-import com.consolelogteam.inventorysystem.Exceptions.ExceedWeightLimitException;
-import com.consolelogteam.inventorysystem.Exceptions.MaxInventorySlotsReachedException;
-import com.consolelogteam.inventorysystem.Dal.Persistence;
+import com.consolelogteam.inventorysystem.exceptions.ExceedItemLimitException;
+import com.consolelogteam.inventorysystem.exceptions.ExceedWeightLimitException;
+import com.consolelogteam.inventorysystem.exceptions.MaxInventorySlotsReachedException;
+import com.consolelogteam.inventorysystem.dal.Persistence;
 import javafx.collections.ObservableList;
 
 import java.io.FileNotFoundException;

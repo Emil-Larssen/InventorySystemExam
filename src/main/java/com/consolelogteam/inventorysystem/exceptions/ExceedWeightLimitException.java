@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem.Exceptions;
+package com.consolelogteam.inventorysystem.exceptions;
 
 public class ExceedWeightLimitException extends RuntimeException {
     public ExceedWeightLimitException(String message) {

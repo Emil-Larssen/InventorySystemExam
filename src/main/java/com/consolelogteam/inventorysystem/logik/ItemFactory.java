@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem.Logik;
+package com.consolelogteam.inventorysystem.logik;
 
 public class ItemFactory {
 

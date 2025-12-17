@@ -1,9 +1,9 @@
-package com.consolelogteam.inventorysystem.UI;
+package com.consolelogteam.inventorysystem.ui;
 
-import com.consolelogteam.inventorysystem.Exceptions.ExceedItemLimitException;
-import com.consolelogteam.inventorysystem.Exceptions.ExceedWeightLimitException;
-import com.consolelogteam.inventorysystem.Exceptions.MaxInventorySlotsReachedException;
-import com.consolelogteam.inventorysystem.Logik.*;
+import com.consolelogteam.inventorysystem.exceptions.ExceedItemLimitException;
+import com.consolelogteam.inventorysystem.exceptions.ExceedWeightLimitException;
+import com.consolelogteam.inventorysystem.exceptions.MaxInventorySlotsReachedException;
+import com.consolelogteam.inventorysystem.logik.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

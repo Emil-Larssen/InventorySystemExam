@@ -1,4 +1,4 @@
-package com.consolelogteam.inventorysystem.Logik;
+package com.consolelogteam.inventorysystem.logik;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
