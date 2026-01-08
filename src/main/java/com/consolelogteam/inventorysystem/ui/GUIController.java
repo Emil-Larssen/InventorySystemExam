@@ -133,7 +133,8 @@ public class GUIController {
     private void removeItemOnClick() {
         Item item = inventoryListView.getSelectionModel().getSelectedItem();
         if (item != null) {
-            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(), inventoryListView.getSelectionModel().getSelectedItem().getItemId());
+            removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(),
+                    inventoryListView.getSelectionModel().getSelectedItem());
 
             if (item instanceof Consumable){
                 inventoryListView.refresh();
@@ -213,8 +214,8 @@ public class GUIController {
     }
 
     //Fjerner item fra inventory
-    private void removeItemFromInventory(int inventoryindex, ItemId itemId) {
-        inventoryManager.removeItemFromInventory(inventoryindex, itemId);
+    private void removeItemFromInventory(int inventoryindex, Item item) {
+        inventoryManager.removingItemFromInventory(inventoryindex, item);
 
         //Updating inventory variables
         updateAllInventoryVariables();

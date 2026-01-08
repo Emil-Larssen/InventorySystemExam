@@ -79,9 +79,17 @@ public class Inventory {
     public void addItem(ItemId itemid) {
         inventoryList.add(itemfactory.createItem(itemid));
     }
-    protected void removeItem(int inventoryindex) {
-        //Observable list remove() takes from-to indices. "to" being exclusive.
-        inventoryList.remove(inventoryindex, inventoryindex+1);
+
+    protected void checkRemoveItem(int inventoryindex, Item itemToCheck) {
+        if (itemToCheck instanceof Consumable){
+            if (((Consumable) itemToCheck).getStacksize()>1){
+                ((Consumable) itemToCheck).decrementStacksize();
+            } else {
+                inventoryList.remove(inventoryindex);
+            }
+        } else {
+            inventoryList.remove(inventoryindex);
+        }
     }
 
 

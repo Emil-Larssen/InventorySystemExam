@@ -18,6 +18,9 @@ public class InventoryManager {
     private Persistence persistence = new Persistence();
 
 
+    private ItemFactory itemFactory = new ItemFactory();
+
+
     /** Returning the Inventory List */
     public ObservableList<Item> getItemList() {
         return inventory.getInventoryList();
@@ -107,23 +110,8 @@ public class InventoryManager {
         }
     }
 
-    public void removeItemFromInventory(int inventoryIndex, ItemId itemId) {
-        boolean existsInInventory = false;
-        if (inventory.tempMakeItem(itemId) instanceof Consumable){
-            for (Item item : inventory.getInventoryList()){
-                if (item instanceof Consumable){
-                    if (item.getItemId() == itemId){
-                        ((Consumable) item).decrementStacksize();
-                        if (((Consumable) item).getStacksize() != 0) {
-                            existsInInventory = true;
-                        }
-                    }
-                }
-            }
-        }
-        if (!existsInInventory) {
-            inventory.removeItem(inventoryIndex);
-        }
+    public void removingItemFromInventory(int inventoryIndex, Item item) {
+        inventory.checkRemoveItem(inventoryIndex, item);
     }
 
     /** Update Slots Filled and Formating the Limit */
