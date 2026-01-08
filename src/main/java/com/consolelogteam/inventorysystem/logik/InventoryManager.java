@@ -83,31 +83,7 @@ public class InventoryManager {
 
     /** Adding and Removing Items from Inventory */
     public void addItemToInventory(ItemId itemId) {
-        boolean existsInInventory = false;
-
-        if (inventory.tempMakeItem(itemId) instanceof Consumable){
-            if (inventory.getWeightFilled() + (inventory.tempMakeItem(itemId).getWeight()) <= inventory.getWeightLimit()) {
-                for (Item item : inventory.getInventoryList()) {
-                    if (item instanceof Consumable) {
-                        if (item.getItemId() == itemId) {
-                            ((Consumable) item).incrementStacksize();
-                            existsInInventory = true;
-                        }
-                    }
-                }
-            }
-        }
-        if (!existsInInventory) {
-            if (inventory.getSlotsFilled() < inventory.getItemSlotsLimit()) {
-                if (inventory.getWeightFilled() + (inventory.tempMakeItem(itemId).getWeight()) <= inventory.getWeightLimit()) {
-                    inventory.addItem(itemId);
-                } else {
-                    throw new ExceedWeightLimitException("Du må ikke overskride den maksimale vægt");
-                }
-            } else {
-                throw new ExceedItemLimitException("Du må ikke overskride det maksimale antal items");
-            }
-        }
+        inventory.checkAddItem(itemFactory.createItem(itemId), itemId);
     }
 
     public void removingItemFromInventory(int inventoryIndex, Item item) {

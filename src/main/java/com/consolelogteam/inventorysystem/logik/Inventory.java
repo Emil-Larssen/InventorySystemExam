@@ -1,11 +1,12 @@
 package com.consolelogteam.inventorysystem.logik;
+import com.consolelogteam.inventorysystem.exceptions.ExceedItemLimitException;
+import com.consolelogteam.inventorysystem.exceptions.ExceedWeightLimitException;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
 public class Inventory {
 
     private ObservableList<Item> inventoryList = FXCollections.observableArrayList();
-    private ItemFactory itemfactory = new ItemFactory();
 
     /** Inventory constraints */
     private final int STARTINGINVENTORYSLOTS = 32;
@@ -76,8 +77,27 @@ public class Inventory {
 
 
     /** Adding and removing Items from Inventory */
-    public void addItem(ItemId itemid) {
-        inventoryList.add(itemfactory.createItem(itemid));
+    public void checkAddItem(Item itemToCheck, ItemId itemid) {
+        if (weightFilled + itemToCheck.getWeight() <= WEIGHTLIMIT){
+            if (itemToCheck instanceof Consumable){
+                for (Item item : inventoryList){
+                    if (item instanceof Consumable) {
+                        if (itemid == item.getItemId()) {
+                            ((Consumable) item).incrementStacksize();
+                            return;
+                        }
+                    }
+                }
+
+            }
+            if (slotsFilled < inventorySlotsLimit){
+                inventoryList.add(itemToCheck);
+            } else {
+                throw new ExceedItemLimitException("Der kan ikke tilføjes flere items end det maksimale antal items");
+            }
+        } else {
+            throw new ExceedWeightLimitException("Der kan ikke tilføjes mere vægt end den maksimale vægt");
+        }
     }
 
     protected void checkRemoveItem(int inventoryindex, Item itemToCheck) {
@@ -96,12 +116,6 @@ public class Inventory {
     /** Loading the Saved List */
     public void loadSavedList(ObservableList<Item> savedList){
         inventoryList = savedList;
-    }
-
-
-    /** Temporarily make an Item for Logic Purposes */
-    public Item tempMakeItem(ItemId itemId){
-         return itemfactory.createItem(itemId);
     }
 
 
