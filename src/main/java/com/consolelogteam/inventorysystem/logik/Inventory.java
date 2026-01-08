@@ -112,6 +112,28 @@ public class Inventory {
         }
     }
 
+    public void checkLoadedSlots(int loadedInventorySlots) {
+            if (loadedInventorySlots >= STARTINGINVENTORYSLOTS && loadedInventorySlots <= MAXINVENTORYSLOTS) {
+                if (loadedInventorySlots >= slotsFilled) {
+                    inventorySlotsLimit = loadedInventorySlots;
+                } else {
+                    calculateNeededSlots();
+                    throw new RuntimeException("Der blev fundet et antal inventory pladser som var mindre end det nødvendige");
+                }
+            } else {
+                calculateNeededSlots();
+                throw new RuntimeException("Der blev fundet et antal inventory pladser som er under minimum eller over maksimum");
+            }
+    }
+
+    public void calculateNeededSlots(){
+        int calculatedSlots = STARTINGINVENTORYSLOTS;
+        while(calculatedSlots < slotsFilled){
+            calculatedSlots += INCREMENTINCREASESLOTS;
+        }
+        inventorySlotsLimit = calculatedSlots;
+    }
+
 
     /** Loading the Saved List */
     public void loadSavedList(ObservableList<Item> savedList){

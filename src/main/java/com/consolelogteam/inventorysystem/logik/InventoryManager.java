@@ -40,29 +40,17 @@ public class InventoryManager {
     /** Loading and Saving Inventory Slots */
     public void loadInventorySlots(){
         try {
-            int loadedInventorySlots = persistence.loadAmountOfInventorySlots();
-            if (loadedInventorySlots >= inventory.getStartingInventorySlots() && loadedInventorySlots <= inventory.getMaxInventorySlotLimit()){
-                if (loadedInventorySlots >= inventory.getSlotsFilled()){
-                    inventory.setSlotLimit(loadedInventorySlots);
-                } else {
-                    inventory.setSlotLimit(calculateNeededSlots());
-                    throw new RuntimeException("Der blev fundet et antal inventory pladser som var mindre end det nødvendige");
-                }
-            } else {
-                inventory.setSlotLimit(calculateNeededSlots());
-                throw new RuntimeException("Der blev fundet et antal inventory pladser som er under minimum eller over maksimum");
-            }
-
+            inventory.checkLoadedSlots(persistence.loadAmountOfInventorySlots());
         } catch (FileNotFoundException fnfe){
-            inventory.setSlotLimit(calculateNeededSlots());
+            inventory.calculateNeededSlots();
             throw new RuntimeException("Der blev ikke fundet en fil til gemte inventory pladser");
 
         } catch (IOException ioe){
-            inventory.setSlotLimit(calculateNeededSlots());
+            inventory.calculateNeededSlots();
             throw new RuntimeException("Der gik noget galt i forbindelse med at gendanne inventory pladser");
 
         } catch (NumberFormatException nfe){
-            inventory.setSlotLimit(calculateNeededSlots());
+            inventory.calculateNeededSlots();
             throw new RuntimeException("Der blev ikke fundet et heltal i den gemte fil");
         }
     }
@@ -71,14 +59,6 @@ public class InventoryManager {
         persistence.saveAmountOfInventorySlots(inventory.getItemSlotsLimit());
     }
 
-    /** Calculating the Needed Slots in case of File Error */
-    public int calculateNeededSlots(){
-        int calculatedSlots = inventory.getStartingInventorySlots();
-        while(calculatedSlots < inventory.getSlotsFilled()){
-            calculatedSlots += inventory.getIncrementInventorySlots();
-        }
-        return calculatedSlots;
-    }
 
 
     /** Adding and Removing Items from Inventory */
