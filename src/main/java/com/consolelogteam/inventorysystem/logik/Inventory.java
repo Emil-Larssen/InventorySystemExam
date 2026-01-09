@@ -145,6 +145,15 @@ public class Inventory {
         }
     }
 
+    public void refreshSlotsFilled(){
+        slotsFilled = inventoryList.size();
+    }
+
+    public String refreshPrintSlots(){
+        return "Pladser: " + slotsFilled + " / " + inventorySlotsLimit;
+    }
+
+
     /** Loading the Saved List */
     public void loadSavedList(ObservableList<Item> savedList){
         inventoryList = savedList;

@@ -227,7 +227,7 @@ public class GUIController {
     //Updates all inventory variables
     private void updateAllInventoryVariables(){
         inventoryManager.updateSlotsFilled();
-        inventoryLimitLabel.setText(inventoryManager.printItemLimit());
+        inventoryLimitLabel.setText(inventoryManager.printSlotsLimit());
         inventoryManager.updateWeightFilled();
         inventoryWeightLabel.setText(inventoryManager.printWeightLimit());
     }

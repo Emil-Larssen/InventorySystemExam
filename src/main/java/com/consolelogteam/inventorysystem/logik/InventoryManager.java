@@ -70,11 +70,11 @@ public class InventoryManager {
 
     /** Update Slots Filled and Formating the Limit */
     public void updateSlotsFilled() {
-        inventory.setSlotsFilled(inventory.getInventoryLength());
+        inventory.refreshSlotsFilled();
     }
 
-    public String printItemLimit() {
-        return "Pladser: " + inventory.getSlotsFilled() + " / " + inventory.getItemSlotsLimit();
+    public String printSlotsLimit() {
+        return inventory.refreshPrintSlots();
     }
 
     /** Update Weight Filled and Formating the Limit */
