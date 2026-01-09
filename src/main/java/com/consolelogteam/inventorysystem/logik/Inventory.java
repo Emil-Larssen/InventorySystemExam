@@ -1,6 +1,7 @@
 package com.consolelogteam.inventorysystem.logik;
 import com.consolelogteam.inventorysystem.exceptions.ExceedItemLimitException;
 import com.consolelogteam.inventorysystem.exceptions.ExceedWeightLimitException;
+import com.consolelogteam.inventorysystem.exceptions.MaxInventorySlotsReachedException;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
@@ -134,6 +135,15 @@ public class Inventory {
         inventorySlotsLimit = calculatedSlots;
     }
 
+    public void checkIncreaseSlotsLimit(){
+        int newLimit = inventorySlotsLimit + INCREMENTINCREASESLOTS;
+        if (newLimit <= MAXINVENTORYSLOTS){
+             inventorySlotsLimit = newLimit;
+        } else {
+            throw new MaxInventorySlotsReachedException("Du kan ikke forøge inventory pladser til mere end "
+                    + MAXINVENTORYSLOTS);
+        }
+    }
 
     /** Loading the Saved List */
     public void loadSavedList(ObservableList<Item> savedList){

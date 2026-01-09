@@ -3,6 +3,7 @@ module com.consolelogteam.inventorysystem {
     requires javafx.fxml;
 
 
+
     opens com.consolelogteam.inventorysystem to javafx.fxml;
     exports com.consolelogteam.inventorysystem;
     exports com.consolelogteam.inventorysystem.exceptions;

@@ -1,7 +1,5 @@
 package com.consolelogteam.inventorysystem.logik;
 
-import com.consolelogteam.inventorysystem.exceptions.ExceedItemLimitException;
-import com.consolelogteam.inventorysystem.exceptions.ExceedWeightLimitException;
 import com.consolelogteam.inventorysystem.exceptions.MaxInventorySlotsReachedException;
 import com.consolelogteam.inventorysystem.dal.Persistence;
 import javafx.collections.ObservableList;
@@ -12,13 +10,13 @@ import java.io.IOException;
 public class InventoryManager {
 
     /** Objects */
-    private Inventory inventory = new Inventory();
+    private final Inventory inventory = new Inventory();
 
     //Persistence object added to interact with the class
-    private Persistence persistence = new Persistence();
+    private final Persistence persistence = new Persistence();
 
 
-    private ItemFactory itemFactory = new ItemFactory();
+    private final ItemFactory itemFactory = new ItemFactory();
 
 
     /** Returning the Inventory List */
@@ -99,11 +97,7 @@ public class InventoryManager {
 
     /** Increasing the Slot Limit */
     public void increasingSlotsLimit(){
-        if (inventory.getItemSlotsLimit() + inventory.getIncrementInventorySlots() <= inventory.getMaxInventorySlotLimit()){
-            inventory.setSlotLimit(inventory.getItemSlotsLimit()+inventory.getIncrementInventorySlots());
-        } else {
-            throw new MaxInventorySlotsReachedException("Du kan ikke forøge inventory pladser til mere end " + inventory.getMaxInventorySlotLimit());
-        }
+        inventory.checkIncreaseSlotsLimit();
     }
 
 
