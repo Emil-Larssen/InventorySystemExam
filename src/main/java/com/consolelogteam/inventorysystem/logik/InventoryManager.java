@@ -79,19 +79,11 @@ public class InventoryManager {
 
     /** Update Weight Filled and Formating the Limit */
     public void updateWeightFilled() {
-        double weight = 0;
-        for (Item item : inventory.getInventoryList()) {
-            if (item instanceof Consumable){
-                weight += item.getWeight() * ((Consumable) item).getStacksize();
-            } else {
-                weight += item.getWeight();
-            }
-        }
-        inventory.setWeightFilled(weight);
+        inventory.refreshWeightFilled();
     }
 
     public String printWeightLimit() {
-        return "Vægt: " + String.format("%.2f",inventory.getWeightFilled())  + " kg" + " / " + String.format("%.2f",inventory.getWeightLimit()) + " kg";
+        return inventory.refreshPrintWeight();
     }
 
 

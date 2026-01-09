@@ -27,54 +27,11 @@ public class Inventory {
         return inventoryList;
     }
 
-
-    public int getMaxInventorySlotLimit(){
-        return MAXINVENTORYSLOTS;
-    }
-
-    //Inventory Slots
-    public int getStartingInventorySlots(){
-        return STARTINGINVENTORYSLOTS;
-    }
-
-    public int getIncrementInventorySlots(){
-        return INCREMENTINCREASESLOTS;
-    }
-
     public int getItemSlotsLimit(){
         return inventorySlotsLimit;
     }
 
-    public int getSlotsFilled(){
-        return slotsFilled;
-    }
 
-    //Weight
-    public double getWeightLimit(){
-        return WEIGHTLIMIT;
-    }
-
-    public double getWeightFilled(){
-        return weightFilled;
-    }
-
-    public int getInventoryLength(){
-        return inventoryList.size();
-    }
-
-
-    /** Setters */
-    public void setSlotLimit(int newLimit){
-        inventorySlotsLimit = newLimit;
-    }
-
-    public void setSlotsFilled(int slotsFilled){
-        this.slotsFilled = slotsFilled;
-    }
-
-    public void setWeightFilled(double weightFilled){
-        this.weightFilled = weightFilled;
-    }
 
 
     /** Adding and removing Items from Inventory */
@@ -151,6 +108,25 @@ public class Inventory {
 
     public String refreshPrintSlots(){
         return "Pladser: " + slotsFilled + " / " + inventorySlotsLimit;
+    }
+
+
+    public void refreshWeightFilled(){
+        double weight = 0;
+        for (Item item : inventoryList) {
+            if (item instanceof Consumable){
+                weight += item.getWeight() * ((Consumable) item).getStacksize();
+            } else {
+                weight += item.getWeight();
+            }
+        }
+        weightFilled = weight;
+    }
+
+
+    public String refreshPrintWeight(){
+        return "Vægt: " + String.format("%.2f",weightFilled)  + " kg" + " / "
+                + String.format("%.2f",WEIGHTLIMIT) + " kg";
     }
 
 
