@@ -80,8 +80,9 @@ public class Inventory {
         inventoryList.add(itemfactory.createItem(itemid));
     }
     protected void removeItem(int inventoryindex) {
-        //Observable list remove() takes from-to indices. "to" being exclusive.
-        inventoryList.remove(inventoryindex, inventoryindex+1);
+        //ObservableList har også adgang til metoder fra list og kan derfor bare bruge metoden remove
+        // som sletter baseret på indeksets værdi
+        inventoryList.remove(inventoryindex);  //ændring er sket her siden aflevering
     }
 
 
@@ -106,6 +107,7 @@ public class Inventory {
             swappedSomething = false;
 
             for (int i = 0; i < inventoryList.size() - 1; i++) {
+
                 if (inventoryList.get(i).getItemName()
                         .compareTo(inventoryList.get(i + 1).getItemName()) > 0) {
                     swappedSomething = true;
