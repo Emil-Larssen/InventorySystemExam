@@ -1,5 +1,6 @@
 package com.consolelogteam.inventorysystem.logik;
 
+//Sub-klasse af "Item"
 public class Weapon extends Item {
 
     private WeaponEquip weaponEquip;
