@@ -37,20 +37,12 @@ public class InventoryManager {
 
     /** Loading and Saving Inventory Slots */
     public void loadInventorySlots(){
-        try {
-            inventory.checkLoadedSlots(persistence.loadAmountOfInventorySlots());
-        } catch (FileNotFoundException fnfe){
-            inventory.calculateNeededSlots();
-            throw new RuntimeException("Der blev ikke fundet en fil til gemte inventory pladser");
+        inventory.checkLoadedSlots(persistence.loadAmountOfInventorySlots());
+    }
 
-        } catch (IOException ioe){
-            inventory.calculateNeededSlots();
-            throw new RuntimeException("Der gik noget galt i forbindelse med at gendanne inventory pladser");
-
-        } catch (NumberFormatException nfe){
-            inventory.calculateNeededSlots();
-            throw new RuntimeException("Der blev ikke fundet et heltal i den gemte fil");
-        }
+    //Calculating a new slotLimit
+    public void calculateNewSlotLimit(){
+        inventory.calculateNeededSlots();
     }
 
     public void saveInventorySlots(){

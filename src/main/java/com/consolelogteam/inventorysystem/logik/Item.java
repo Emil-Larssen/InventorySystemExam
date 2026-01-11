@@ -21,6 +21,7 @@ public abstract class Item implements Serializable {
         return itemName;
     }
 
+    @Override
     public String toString() {
         return itemName + "   " + String.format("%.2f",weight)  + " kg";
     }

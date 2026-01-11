@@ -46,10 +46,19 @@ public class Persistence {
 
     /** Loading and Saving of Inventory Slots */
 
-    public int loadAmountOfInventorySlots() throws  FileNotFoundException, IOException, NumberFormatException{
+    public int loadAmountOfInventorySlots() {
         try (BufferedReader reader = new BufferedReader(new FileReader("InventorySlotsAmount.txt"))){
             String line = reader.readLine();
             return Integer.parseInt(line);
+
+        } catch (FileNotFoundException fnfe){
+            throw new RuntimeException("Der blev ikke fundet en fil til gemte inventory pladser");
+
+        } catch (IOException ioe){
+            throw new RuntimeException("Der gik noget galt i forbindelse med at gendanne inventory pladser");
+
+        } catch (NumberFormatException nfe){
+            throw new RuntimeException("Der blev ikke fundet et heltal i den gemte fil");
         }
     }
 

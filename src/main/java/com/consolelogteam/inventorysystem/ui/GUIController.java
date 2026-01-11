@@ -66,6 +66,7 @@ public class GUIController {
         } catch (RuntimeException re) {
             errorMessageAnchorPane.setVisible(true);
             errorMessageOutput.appendText("\nFejl ved Gendannelse af Inventory Pladser: " + re.getMessage());
+            inventoryManager.calculateNewSlotLimit();
 
             //In case an error has occurred the new calculated inventory slots should be properly saved
             try {
@@ -164,6 +165,7 @@ public class GUIController {
             try {
                 inventoryManager.saveInventorySlots();
             } catch (RuntimeException re) {
+                errorMessageAnchorPane.setVisible(true);
                 errorMessageOutput.appendText("\nFejl ved Gem af Inventory Pladser: " + re.getMessage());
             }
 

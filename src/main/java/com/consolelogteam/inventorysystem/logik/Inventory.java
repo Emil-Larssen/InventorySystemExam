@@ -36,26 +36,26 @@ public class Inventory {
 
     /** Adding and removing Items from Inventory */
     public void checkAddItem(Item itemToCheck, ItemId itemid) {
-        if (weightFilled + itemToCheck.getWeight() <= WEIGHTLIMIT){
-            if (itemToCheck instanceof Consumable){
-                for (Item item : inventoryList){
-                    if (item instanceof Consumable) {
-                        if (itemid == item.getItemId()) {
-                            ((Consumable) item).incrementStacksize();
-                            return;
+        if (weightFilled + itemToCheck.getWeight() <= WEIGHTLIMIT) {
+            if (itemToCheck instanceof Consumable) {
+                boolean found = false;
+                for (int i = 0; i < inventoryList.size() && !found; i++) {
+                    if (inventoryList.get(i) instanceof Consumable) {
+                        if (itemid == inventoryList.get(i).getItemId()) {
+                            ((Consumable) inventoryList.get(i)).incrementStacksize();
+                            found = true;
                         }
                     }
                 }
-
             }
-            if (slotsFilled < inventorySlotsLimit){
-                inventoryList.add(itemToCheck);
+                if (slotsFilled < inventorySlotsLimit) {
+                    inventoryList.add(itemToCheck);
+                } else {
+                    throw new ExceedItemLimitException("Der kan ikke tilføjes flere items end det maksimale antal items");
+                }
             } else {
-                throw new ExceedItemLimitException("Der kan ikke tilføjes flere items end det maksimale antal items");
+                throw new ExceedWeightLimitException("Der kan ikke tilføjes mere vægt end den maksimale vægt");
             }
-        } else {
-            throw new ExceedWeightLimitException("Der kan ikke tilføjes mere vægt end den maksimale vægt");
-        }
     }
 
     protected void checkRemoveItem(int inventoryindex, Item itemToCheck) {
