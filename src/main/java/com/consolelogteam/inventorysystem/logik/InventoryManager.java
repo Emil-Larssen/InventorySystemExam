@@ -2,7 +2,7 @@ package com.consolelogteam.inventorysystem.logik;
 
 
 import com.consolelogteam.inventorysystem.dal.Persistence;
-import javafx.collections.ObservableList;
+import java.util.List;
 
 public class InventoryManager {
 
@@ -17,7 +17,7 @@ public class InventoryManager {
 
 
     /** Returning the Inventory List */
-    public ObservableList<Item> getItemList() {
+    public List<Item> getItemList() {
         return inventory.getInventoryList();
     }
 

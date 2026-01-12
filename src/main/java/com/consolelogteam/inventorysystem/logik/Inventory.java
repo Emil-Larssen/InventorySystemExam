@@ -2,12 +2,12 @@ package com.consolelogteam.inventorysystem.logik;
 import com.consolelogteam.inventorysystem.exceptions.ExceedItemLimitException;
 import com.consolelogteam.inventorysystem.exceptions.ExceedWeightLimitException;
 import com.consolelogteam.inventorysystem.exceptions.MaxInventorySlotsReachedException;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory {
 
-    private ObservableList<Item> inventoryList = FXCollections.observableArrayList();
+    private List<Item> inventoryList = new ArrayList<>();
 
     /** Inventory constraints */
     private final int STARTINGINVENTORYSLOTS = 32;
@@ -23,8 +23,8 @@ public class Inventory {
 
 
     /** Getters */
-    public ObservableList<Item> getInventoryList() {
-        return inventoryList;
+    public List<Item> getInventoryList() {
+        return  inventoryList;
     }
 
     public int getItemSlotsLimit(){
@@ -131,7 +131,7 @@ public class Inventory {
 
 
     /** Loading the Saved List */
-    public void loadSavedList(ObservableList<Item> savedList){
+    public void loadSavedList(List<Item> savedList){
         inventoryList = savedList;
     }
 

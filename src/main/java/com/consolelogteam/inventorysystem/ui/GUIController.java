@@ -17,11 +17,15 @@ public class GUIController {
 
     private final InventoryManager inventoryManager = new InventoryManager();
 
+    private ObservableList<Item> listOfInventory = FXCollections.observableArrayList();
+
     List<ItemId> list = Arrays.asList(ItemId.values());
     ObservableList<ItemId> availableItems = FXCollections.observableArrayList(list);
 
 
-    /** Scenebuilder Elements   */
+    /**
+     * Scenebuilder Elements
+     */
     @FXML
     private ComboBox<String> sortingCombobox;
 
@@ -47,7 +51,9 @@ public class GUIController {
     private TextArea errorMessageOutput;
 
 
-    /**  Code Run On Start-Up */
+    /**
+     * Code Run On Start-Up
+     */
     @FXML
     public void initialize() {
         //Added loading the saved Inventory as the first part of initialize
@@ -76,24 +82,25 @@ public class GUIController {
             }
         }
 
+        updateInventoryList();
         updateAllInventoryVariables();
 
         //------------------------------------
         //Viser valgt item fra inventoryListView i textfield
-        inventoryListView.setItems(inventoryManager.getItemList());
+        inventoryListView.setItems(listOfInventory);
 
         inventoryListView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((obs, oldItem, newItem) -> {
                     if (newItem != null) {
-                        if (newItem instanceof Weapon){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f",newItem.getWeight()) + " kg  -  Våben");
+                        if (newItem instanceof Weapon) {
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f", newItem.getWeight()) + " kg  -  Våben");
                         }
-                        if (newItem instanceof Armor){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f",newItem.getWeight())  + " kg  -  Rustning");
+                        if (newItem instanceof Armor) {
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f", newItem.getWeight()) + " kg  -  Rustning");
                         }
-                        if (newItem instanceof Consumable){
-                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f",newItem.getWeight() * ((Consumable) newItem).getStacksize())  + " kg " + " antal: " + ((Consumable) newItem).getStacksize() + "  -  Konsumerbar");
+                        if (newItem instanceof Consumable) {
+                            selectedItemTextField.setText("Valgt item:  " + newItem.getItemName() + "  " + String.format("%.2f", newItem.getWeight() * ((Consumable) newItem).getStacksize()) + " kg " + " antal: " + ((Consumable) newItem).getStacksize() + "  -  Konsumerbar");
                         }
                     } else {
                         selectedItemTextField.setText("Ingen item valgt");
@@ -123,9 +130,11 @@ public class GUIController {
     }
 
 
-    /** Buttons and ComboBoxes */
+    /**
+     * Buttons and ComboBoxes
+     */
     @FXML
-    private void understoodButtonOnClick(){
+    private void understoodButtonOnClick() {
         errorMessageAnchorPane.setVisible(false);
         errorMessageOutput.clear();
     }
@@ -137,9 +146,9 @@ public class GUIController {
             removeItemFromInventory(inventoryListView.getSelectionModel().getSelectedIndex(),
                     inventoryListView.getSelectionModel().getSelectedItem());
 
-            if (item instanceof Consumable){
+            if (item instanceof Consumable) {
                 inventoryListView.refresh();
-                selectedItemTextField.setText("Valgt item:  " + item.getItemName() + "  " + String.format("%.2f",item.getWeight() * ((Consumable) item).getStacksize())  + " kg " + " antal: " + ((Consumable) item).getStacksize() + "  -  Konsumerbar");
+                selectedItemTextField.setText("Valgt item:  " + item.getItemName() + "  " + String.format("%.2f", item.getWeight() * ((Consumable) item).getStacksize()) + " kg " + " antal: " + ((Consumable) item).getStacksize() + "  -  Konsumerbar");
             }
         }
 
@@ -158,7 +167,7 @@ public class GUIController {
 
 
     @FXML
-    private void increaseSlotsOnClick(){
+    private void increaseSlotsOnClick() {
         try {
             inventoryManager.increasingSlotsLimit();
             updateAllInventoryVariables();
@@ -169,7 +178,7 @@ public class GUIController {
                 errorMessageOutput.appendText("\nFejl ved Gem af Inventory Pladser: " + re.getMessage());
             }
 
-        } catch (MaxInventorySlotsReachedException misre){
+        } catch (MaxInventorySlotsReachedException misre) {
             errorMessageAnchorPane.setVisible(true);
             errorMessageOutput.setText("Fejl ved Forøgelse af Pladser: " + misre.getMessage());
         }
@@ -191,22 +200,28 @@ public class GUIController {
                 break;
             default:
         }
+        updateInventoryList();
     }
 
 
-    /** Commonly Used Defined Methods */
+    /***
+     * Commonly Used Defined Methods
+     * */
     //Forbinder addItemOnClick med inventory manager
     private void addingItemToInventory(ItemId itemId) {
         try {
             inventoryManager.addItemToInventory(itemId);
 
-        } catch (ExceedItemLimitException eile){
+        } catch (ExceedItemLimitException eile) {
             errorMessageAnchorPane.setVisible(true);
             errorMessageOutput.setText("Fejl ved Pladser: " + eile.getMessage());
-        } catch (ExceedWeightLimitException ewle){
+        } catch (ExceedWeightLimitException ewle) {
             errorMessageAnchorPane.setVisible(true);
             errorMessageOutput.setText("Fejl ved Vægt: " + ewle.getMessage());
         }
+
+        //Updates List
+        updateInventoryList();
 
         //Updating inventory variables
         updateAllInventoryVariables();
@@ -219,6 +234,10 @@ public class GUIController {
     private void removeItemFromInventory(int inventoryindex, Item item) {
         inventoryManager.removingItemFromInventory(inventoryindex, item);
 
+        //Updates inventory in GUI
+        updateInventoryList();
+
+
         //Updating inventory variables
         updateAllInventoryVariables();
 
@@ -227,7 +246,7 @@ public class GUIController {
     }
 
     //Updates all inventory variables
-    private void updateAllInventoryVariables(){
+    private void updateAllInventoryVariables() {
         inventoryManager.updateSlotsFilled();
         inventoryLimitLabel.setText(inventoryManager.printSlotsLimit());
         inventoryManager.updateWeightFilled();
@@ -235,12 +254,18 @@ public class GUIController {
     }
 
     //Saves the inventory
-    private void savingInventory(){
+    private void savingInventory() {
         try {
             inventoryManager.savingInventory();
         } catch (RuntimeException re) {
             errorMessageAnchorPane.setVisible(true);
             errorMessageOutput.setText("Fejl ved Gem af Inventory: " + re.getMessage());
         }
+    }
+
+
+    private void updateInventoryList() {
+        listOfInventory.clear();
+        listOfInventory.addAll(inventoryManager.getItemList());
     }
 }

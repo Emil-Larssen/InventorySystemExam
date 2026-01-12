@@ -1,8 +1,6 @@
 package com.consolelogteam.inventorysystem.dal;
 
 import com.consolelogteam.inventorysystem.logik.Item;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,12 +10,12 @@ public class Persistence {
 
     /** Loading and saving of Inventory List */
 
-    public ObservableList<Item> loadListOfItems(){
+    public List<Item> loadListOfItems(){
         try(ObjectInputStream objectInput = new ObjectInputStream((new FileInputStream("SavedItems.ser")))){
 
             List<Item> savedList = (ArrayList<Item>) objectInput.readObject();
 
-            return FXCollections.observableArrayList(savedList);
+            return savedList;
 
         } catch (FileNotFoundException fnfe) {
             throw new RuntimeException("Der blev ikke fundet nogen gemt fil til inventory");
@@ -29,11 +27,11 @@ public class Persistence {
     }
 
 
-    public void saveListOfItems(ObservableList<Item> listOfItems){
+    public void saveListOfItems(List<Item> listOfItems){
         try(FileOutputStream fileOutput = new FileOutputStream("SavedItems.ser", false);
             ObjectOutputStream objectOutput = new ObjectOutputStream((fileOutput))){
 
-            objectOutput.writeObject(new ArrayList<Item>(listOfItems));
+            objectOutput.writeObject(listOfItems);
             objectOutput.flush();
 
         } catch (FileNotFoundException fnfe){
