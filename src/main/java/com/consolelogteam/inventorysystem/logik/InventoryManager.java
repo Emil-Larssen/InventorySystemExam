@@ -1,11 +1,8 @@
 package com.consolelogteam.inventorysystem.logik;
 
-import com.consolelogteam.inventorysystem.exceptions.MaxInventorySlotsReachedException;
+
 import com.consolelogteam.inventorysystem.dal.Persistence;
 import javafx.collections.ObservableList;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class InventoryManager {
 
