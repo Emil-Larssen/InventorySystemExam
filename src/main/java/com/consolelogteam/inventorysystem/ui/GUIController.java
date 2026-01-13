@@ -147,7 +147,6 @@ public class GUIController {
                     inventoryListView.getSelectionModel().getSelectedItem());
 
             if (item instanceof Consumable) {
-                inventoryListView.refresh();
                 selectedItemTextField.setText("Valgt item:  " + item.getItemName() + "  " + String.format("%.2f", item.getWeight() * ((Consumable) item).getStacksize()) + " kg " + " antal: " + ((Consumable) item).getStacksize() + "  -  Konsumerbar");
             }
         }
@@ -160,8 +159,6 @@ public class GUIController {
         ItemId selectedId = itemListView.getSelectionModel().getSelectedItem();
         if (selectedId != null) {
             addingItemToInventory(selectedId);
-
-            inventoryListView.refresh();
         }
     }
 
