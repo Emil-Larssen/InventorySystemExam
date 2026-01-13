@@ -36,9 +36,9 @@ public class Inventory {
 
     /** Adding and removing Items from Inventory */
     public void checkAddItem(Item itemToCheck, ItemId itemid) {
+        boolean found = false;
         if (weightFilled + itemToCheck.getWeight() <= WEIGHTLIMIT) {
             if (itemToCheck instanceof Consumable) {
-                boolean found = false;
                 for (int i = 0; i < inventoryList.size() && !found; i++) {
                     if (inventoryList.get(i) instanceof Consumable) {
                         if (itemid == inventoryList.get(i).getItemId()) {
@@ -48,11 +48,13 @@ public class Inventory {
                     }
                 }
             }
+            if (!found) {
                 if (slotsFilled < inventorySlotsLimit) {
                     inventoryList.add(itemToCheck);
                 } else {
                     throw new ExceedItemLimitException("Der kan ikke tilføjes flere items end det maksimale antal items");
                 }
+            }
             } else {
                 throw new ExceedWeightLimitException("Der kan ikke tilføjes mere vægt end den maksimale vægt");
             }
