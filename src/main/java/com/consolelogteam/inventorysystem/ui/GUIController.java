@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class GUIController {
 
@@ -19,8 +18,7 @@ public class GUIController {
 
     private ObservableList<Item> listOfInventory = FXCollections.observableArrayList();
 
-    List<ItemId> list = Arrays.asList(ItemId.values());
-    ObservableList<ItemId> availableItems = FXCollections.observableArrayList(list);
+    private ObservableList<ItemId> availableItems = FXCollections.observableArrayList(Arrays.asList(ItemId.values()));
 
 
     /**
